@@ -19,7 +19,7 @@ export default function Banner() {
         </p>
 
         <div className="mt-10 mx-auto w-1/2">
-          <Link href="/books" className="inline-block hover:animate-bounce">
+          <Link href="/allBooks" className="inline-block hover:animate-bounce">
             <Button className="flex items-center gap-2 bg-[#FFA931]">
               <FaFirefoxBrowser />
               Browse Now

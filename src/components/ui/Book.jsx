@@ -1,5 +1,6 @@
 import { AlertDialog, Button, Card } from "@heroui/react";
 import Image from "next/image";
+import Link from "next/link";
 import React from "react";
 import { MdOutlineExplore } from "react-icons/md";
 
@@ -7,7 +8,7 @@ export default function Book({ book }) {
   return (
     <Card className="hover:shadow-lg transition duration-300 p-5">
       <div className="relative aspect-square w-full overflow-hidden">
-        <span className="absolute top-1 left-1 bg-blue-600 text-white text-sm px-3 py-1 rounded-full shadow-md">
+        <span className="absolute top-6 left-90 z-50 bg-blue-600  text-white text-sm px-3 py-1 rounded-full shadow-md">
           {book.category}
         </span>
         <Image
@@ -24,7 +25,11 @@ export default function Book({ book }) {
         <Button variant="outline" className={""}>
           <MdOutlineExplore /> Explore Naw
         </Button>
-        <Button className="bg-[#FFA931]  hover:shadow-xl">View details</Button>
+        <Link href={`/book/${book.id}`}>
+          <Button className="bg-[#FFA931]  hover:shadow-xl">
+            View details
+          </Button>
+        </Link>
       </div>
     </Card>
   );
