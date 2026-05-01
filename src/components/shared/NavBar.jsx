@@ -21,7 +21,7 @@ export default function NavBar() {
       </div>
       <div className="flex items-center justify-center gap-5">
         <Image src={avater} height={50} width={50} alt="user-avter"></Image>
-        <Button >Log In</Button>
+        <Button className={"bg-[#B9AC92] rounded-xl px-10 text-xl font-medium"}>Log In</Button>
       </div>
     </nav>
    </div>

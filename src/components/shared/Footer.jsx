@@ -32,14 +32,13 @@ export default function Footer() {
           </div>
 
           <div className="">
-             <h2 className="text-xl font-bold">contact us</h2>
+            <h2 className="text-xl font-bold">contact us</h2>
             <div className="flex flex-col gap-3  mt-5">
-             
-              <p  className="flex items-center gap-2 hover:font-semibold">
+              <p className="flex items-center gap-2 hover:font-semibold">
                 <FaMagnifyingGlassLocation /> Dhaka Satrasta
               </p>
               <p className="hover:font-semibold">Ashik@gmail.com</p>
-              <p className="hover:font-semibold">www.BookHunt.com.bd</p>
+              <p className="">www.BookHunt.com.bd</p>
               <p className="flex items-center gap-2 hover:font-semibold">
                 <IoLogoWhatsapp /> 019xxxxxxxx
               </p>
@@ -47,20 +46,36 @@ export default function Footer() {
           </div>
 
           <div className="flex flex-col items-center">
-            <h1 className="text-xl font-bold">Social</h1>
-            <div className="mt-5 flex gap-5 justify-center items-center">
-              <span className="hover:bg-red-500 rounded-full">
-                <FaFacebook size={30} />
-              </span>
-              <span className="hover:bg-red-500 ">
-                <FaLinkedin size={30} />
-              </span>
-              <span className="hover:bg-red-500 ">
-                <MdOutgoingMail size={40} />
-              </span>
+            <h1 className="text-xl font-bold mb-4 text-gray-800">Social</h1>
+
+            <div className="flex gap-6 items-center">
+              <a
+                href="#"
+                className="p-3 rounded-full bg-gray-100 hover:bg-blue-600 hover:text-white transition-all duration-300 shadow-md hover:shadow-xl transform hover:scale-110"
+              >
+                <FaFacebook size={26} />
+              </a>
+
+              <a
+                href="#"
+                className="p-3 rounded-full bg-gray-100 hover:bg-blue-700 hover:text-white transition-all duration-300 shadow-md hover:shadow-xl transform hover:scale-110"
+              >
+                <FaLinkedin size={26} />
+              </a>
+
+              <a
+                href="#"
+                className="p-3 rounded-full bg-gray-100 hover:bg-red-500 hover:text-white transition-all duration-300 shadow-md hover:shadow-xl transform hover:scale-110"
+              >
+                <MdOutgoingMail size={28} />
+              </a>
             </div>
           </div>
         </div>
+        <h2 className="text-center mt-20">
+          {" "}
+          <p>© 2026 BooksHunt. All rights reserved.</p>
+        </h2>
       </div>
     </div>
   );
