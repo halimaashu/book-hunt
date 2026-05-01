@@ -1,6 +1,7 @@
 import Banner from "@/components/shared/Banner";
 import Marque from "@/components/shared/Marque";
 import NavBar from "@/components/shared/NavBar";
+import SpeachileBooks from "@/components/shared/SpeachileBooks";
 
 
 export default function Home() {
@@ -8,6 +9,7 @@ export default function Home() {
     <div className="">
      <Banner/>
      <Marque/>
+     <SpeachileBooks/>
     </div>
   );
 }
