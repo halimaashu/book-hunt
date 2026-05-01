@@ -6,7 +6,7 @@
     "description": "A mysterious journey through an enchanted forest where secrets of nature are revealed.",
     "category": "Story",
     "available_quantity": 12,
-    "image_url": "https://i.ibb.co/SDXc9qKR/book-1.jpg"
+    "image_url": "https://i.ibb.co/kVBRTXG0/book-1.jpg"
   },
   {
     "id": 2,
@@ -24,7 +24,7 @@
     "description": "Exploring galaxies, black holes, and the mysteries of the universe.",
     "category": "Science",
     "available_quantity": 15,
-    "image_url": "https://i.ibb.co/SDXc9qKR/book-3.jpg"
+    "image_url": "https://i.ibb.co/CZC6v2D/book-3.jpg"
   },
   {
     "id": 4,
@@ -33,7 +33,7 @@
     "description": "An ancient kingdom hidden beneath the sands waiting to be discovered.",
     "category": "Story",
     "available_quantity": 5,
-    "image_url": "https://i.ibb.co/SDXc9qKR/book-4.jpg"
+    "image_url": "https://i.ibb.co/n8NBTFh5/book-4.jpg"
   },
   {
     "id": 5,
@@ -42,7 +42,7 @@
     "description": "A complete guide to modern JavaScript development and best practices.",
     "category": "Tech",
     "available_quantity": 20,
-    "image_url": "https://i.ibb.co/SDXc9qKR/book-5.jpg"
+    "image_url": "https://i.ibb.co/Jw2rWKMv/book-5.jpg"
   },
   {
     "id": 6,
@@ -51,7 +51,7 @@
     "description": "Understanding how the brain works and processes information.",
     "category": "Science",
     "available_quantity": 10,
-    "image_url": "https://i.ibb.co/SDXc9qKR/book-6.jpg"
+    "image_url": "https://i.ibb.co/zTCFCjLr/book-6.jpg"
   },
   {
     "id": 7,
@@ -60,7 +60,7 @@
     "description": "A thrilling adventure through dangerous mountain paths and survival challenges.",
     "category": "Story",
     "available_quantity": 7,
-    "image_url": "https://i.ibb.co/SDXc9qKR/book-7.jpg"
+    "image_url": "https://i.ibb.co/2Q20s84/book-7.jpg"
   },
   {
     "id": 8,
@@ -69,7 +69,7 @@
     "description": "How artificial intelligence is transforming industries worldwide.",
     "category": "Tech",
     "available_quantity": 14,
-    "image_url": "https://i.ibb.co/SDXc9qKR/book-8.jpg"
+    "image_url": "https://i.ibb.co/fV7K3FGn/book-8.jpg"
   },
   {
     "id": 9,
@@ -87,7 +87,7 @@
     "description": "A tale of courage, honor, and battles in a medieval world.",
     "category": "Story",
     "available_quantity": 11,
-    "image_url": "https://i.ibb.co/SDXc9qKR/book-10.jpg"
+    "image_url": "https://i.ibb.co/6JgqQGZm/book-10.jpg"
   },
   {
     "id": 11,
@@ -96,7 +96,7 @@
     "description": "An introduction to cloud services, storage, and deployment models.",
     "category": "Tech",
     "available_quantity": 13,
-    "image_url": "https://i.ibb.co/SDXc9qKR/book-11.jpg"
+    "image_url": "https://i.ibb.co/5hMk0nY1/book-11.jpg"
   },
   {
     "id": 12,
@@ -105,6 +105,6 @@
     "description": "How physics explains common phenomena in our daily experiences.",
     "category": "Science",
     "available_quantity": 6,
-    "image_url": "https://i.ibb.co/SDXc9qKR/book-12.jpg"
+    "image_url": "https://i.ibb.co/ycm2dZgM/book-12.webp"
   }
 ]
