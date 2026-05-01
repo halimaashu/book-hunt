@@ -13,7 +13,7 @@ const SpecialBooks=books.slice(0,5)
       <div className=' grid grid-cols-3 gap-10'>
         
       {
-        SpecialBooks.map(book=><Book key={book.id} book={book}/>)
+        books.map(book=><Book key={book.id} book={book}/>)
       }
     </div>
   </div>
