@@ -5,7 +5,7 @@ import Book from '../ui/Book'
 export default async function SpeachileBooks() {
 const books=await getAllBooks()
 console.log(books,"fro speachile pages")
-const SpecialBooks=books.slice(0,5)
+const specialBooks=books.slice(7,12)
   return (
     
   <div className="container mx-auto  py-10">
@@ -13,7 +13,7 @@ const SpecialBooks=books.slice(0,5)
       <div className=' grid grid-cols-3 gap-10'>
         
       {
-        books.map(book=><Book key={book.id} book={book}/>)
+        specialBooks.map(book=><Book key={book.id} book={book}/>)
       }
     </div>
   </div>

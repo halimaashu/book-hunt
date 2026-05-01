@@ -15,7 +15,7 @@ export default function NavBar() {
       <div className="">
         <ul className="flex gap-4 items-center justify-center">
           <li><Link href={"/"}>Home</Link></li>
-          <li><Link href={"/"}>All books</Link></li>
+          <li><Link href={"/allBooks"}>All books</Link></li>
           <li><Link href={"/"}>Profile</Link></li>
         </ul>
       </div>
