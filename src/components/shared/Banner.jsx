@@ -6,7 +6,7 @@ import { FaFirefoxBrowser } from "react-icons/fa"
 
 export default function Banner() {
   return (
-    <div className="py-20 flex flex-col md:flex-row items-center justify-between p-5 bg-blue-50">
+    <div className="py-20 flex flex-col md:flex-row items-center justify-between p-5 bg-blue-50 container mx-auto">
       
       
       <div className="md:flex-1">
@@ -32,14 +32,14 @@ export default function Banner() {
       </div>
 
       {/* Right Image */}
-      <div className="flex-1 mt-10 md:mt-0">
+      <div className="flex-1 mt-10 md:mt-0 ">
         <Image
         sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           src={heroBg}
           width={450}
           height={450}
           alt="hero-banner"
-          className="mx-auto rounded-lg shadow-lg"
+          className="mx-auto rounded-lg shadow-2xl"
         />
       </div>
 
