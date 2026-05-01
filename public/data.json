@@ -1,0 +1,110 @@
+[
+  {
+    "id": 1,
+    "title": "The Hidden Forest",
+    "author": "Ava Morgan",
+    "description": "A mysterious journey through an enchanted forest where secrets of nature are revealed.",
+    "category": "Story",
+    "available_quantity": 12,
+    "image_url": "https://example.com/images/hidden_forest.jpg"
+  },
+  {
+    "id": 2,
+    "title": "Future Code",
+    "author": "Daniel Kim",
+    "description": "A deep dive into next-generation programming concepts and AI-driven development.",
+    "category": "Tech",
+    "available_quantity": 8,
+    "image_url": "https://example.com/images/future_code.jpg"
+  },
+  {
+    "id": 3,
+    "title": "Space and Beyond",
+    "author": "Dr. Emily Carter",
+    "description": "Exploring galaxies, black holes, and the mysteries of the universe.",
+    "category": "Science",
+    "available_quantity": 15,
+    "image_url": "https://example.com/images/space_beyond.jpg"
+  },
+  {
+    "id": 4,
+    "title": "The Lost Kingdom",
+    "author": "John Harris",
+    "description": "An ancient kingdom hidden beneath the sands waiting to be discovered.",
+    "category": "Story",
+    "available_quantity": 5,
+    "image_url": "https://example.com/images/lost_kingdom.jpg"
+  },
+  {
+    "id": 5,
+    "title": "Mastering JavaScript",
+    "author": "Sophia Lee",
+    "description": "A complete guide to modern JavaScript development and best practices.",
+    "category": "Tech",
+    "available_quantity": 20,
+    "image_url": "https://example.com/images/javascript.jpg"
+  },
+  {
+    "id": 6,
+    "title": "The Human Brain",
+    "author": "Dr. Michael Stone",
+    "description": "Understanding how the brain works and processes information.",
+    "category": "Science",
+    "available_quantity": 10,
+    "image_url": "https://example.com/images/brain.jpg"
+  },
+  {
+    "id": 7,
+    "title": "Journey to the Mountains",
+    "author": "Liam Brown",
+    "description": "A thrilling adventure through dangerous mountain paths and survival challenges.",
+    "category": "Story",
+    "available_quantity": 7,
+    "image_url": "https://example.com/images/mountains.jpg"
+  },
+  {
+    "id": 8,
+    "title": "AI Revolution",
+    "author": "Olivia Johnson",
+    "description": "How artificial intelligence is transforming industries worldwide.",
+    "category": "Tech",
+    "available_quantity": 14,
+    "image_url": "https://example.com/images/ai_revolution.jpg"
+  },
+  {
+    "id": 9,
+    "title": "Ocean Mysteries",
+    "author": "Noah Williams",
+    "description": "Discover the unexplored depths and creatures of the ocean.",
+    "category": "Science",
+    "available_quantity": 9,
+    "image_url": "https://example.com/images/ocean.jpg"
+  },
+  {
+    "id": 10,
+    "title": "The Brave Knight",
+    "author": "Emma Davis",
+    "description": "A tale of courage, honor, and battles in a medieval world.",
+    "category": "Story",
+    "available_quantity": 11,
+    "image_url": "https://example.com/images/knight.jpg"
+  },
+  {
+    "id": 11,
+    "title": "Cloud Computing Basics",
+    "author": "Ethan Clark",
+    "description": "An introduction to cloud services, storage, and deployment models.",
+    "category": "Tech",
+    "available_quantity": 13,
+    "image_url": "https://example.com/images/cloud_computing.jpg"
+  },
+  {
+    "id": 12,
+    "title": "Physics of Everyday Life",
+    "author": "Dr. Sarah Wilson",
+    "description": "How physics explains common phenomena in our daily experiences.",
+    "category": "Science",
+    "available_quantity": 6,
+    "image_url": "https://example.com/images/physics.jpg"
+  }
+]
