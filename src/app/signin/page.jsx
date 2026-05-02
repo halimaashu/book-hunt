@@ -1,6 +1,7 @@
 "use client";
 
 import { authClient } from "@/lib/auth-client";
+
 import { Check } from "@gravity-ui/icons";
 import {
   Button,
@@ -12,31 +13,70 @@ import {
   TextField,
 } from "@heroui/react";
 import Link from "next/link";
+import { Router } from "next/router";
 import { RiGoogleFill } from "react-icons/ri";
 
 export default function LoginPages() {
-  const onSubmit =async (e) => {
+    
+  const onSubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
-   const userData = Object.fromEntries(formData.entries());
-    const { email, password } = userData;
-    console.log(email, password, "frpm log ig inpages");
+    const userData = Object.fromEntries(formData.entries());
+    const { email, password, name, image } = userData;
+    console.log(email, password, name, image, "frpm sign inpages");
 
-
-    const { data, error } = await authClient.signIn.email({
-    email: email, // required
-    password: password, // required
-    rememberMe: true,
-    callbackURL: "/",
-});
-console.log(data,error,"from log in pagesss-")
     // alert(`Form submitted with: ${JSON.stringify(data, null, 2)}`);
+
+    const { data, error } = await authClient.signUp.email({
+      name: name, // required
+      email: email, // required
+      password: password, // required
+      image: image,
+      callbackURL: "/login",
+    });
+
+    if (data) {
+    
+
+      alert("sigh Up success");
+    }
+    console.log(data, error, "from sign inpages");
   };
 
   return (
     <div className="  w-[500px] px-10 py-20 shadow-xl mx-auto">
-        <h1 className="text-2xl font-bold mb-5">Log In pages</h1>
+      <h1 className="text-2xl font-bold mb-5">Sign In pages</h1>
       <Form className="flex flex-col gap-4" onSubmit={onSubmit}>
+        <TextField
+          isRequired
+          name="name"
+          validate={(value) => {
+            if (value.length < 3) {
+              return "Name must be at least 3 characters";
+            }
+            return null;
+          }}
+        >
+          <Label>Name</Label>
+          <Input placeholder="Enter Your Name" />
+          <FieldError />
+        </TextField>
+
+        <TextField
+          isRequired
+          name="image"
+          validate={(value) => {
+            if (value.length < 3) {
+              return "Name must be at least 3 characters";
+            }
+            return null;
+          }}
+        >
+          <Label>Photo</Label>
+          <Input placeholder="Enter Your photo Url" />
+          <FieldError />
+        </TextField>
+
         <TextField
           isRequired
           name="email"
@@ -84,7 +124,7 @@ console.log(data,error,"from log in pagesss-")
         <div className="flex gap-2">
           <Button type="submit">
             <Check />
-            Log In
+            Sing in
           </Button>
           <Button type="reset" variant="secondary">
             Reset
@@ -96,12 +136,6 @@ console.log(data,error,"from log in pagesss-")
       <Button className={"w-full  mt-5 mb-5"}>
         <RiGoogleFill /> Sign In with Google
       </Button>
-      <h1 className="">
-        If you don't have A Account{" "}
-        <Link className="font-semibold text-red-500" href={"signin"}>
-          go signUp Page
-        </Link>
-      </h1>
     </div>
   );
 }

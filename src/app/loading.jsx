@@ -1,20 +1,16 @@
-
-'use client'
+"use client";
 import React from "react";
-import { useLottie } from "lottie-react";
-import groovyWalkAnimation from "./groovyWalk.json";
 
-const App = () => {
-  const options = {
-    animationData: groovyWalkAnimation,
-    loop: true
-  };
+import { Spinner } from "@heroui/react";
 
-  const { View } = useLottie(options);
-
-  return <>
-  <h1>loading----------</h1>
-   {View}</>;
+const loadingPage = () => {
+  return (
+    <div className="flex justify-center items-center py-20">
+      <Spinner>
+        <Spinner.Indicator>...</Spinner.Indicator>
+      </Spinner>
+    </div>
+  );
 };
 
-export default App;
+export default loadingPage;
