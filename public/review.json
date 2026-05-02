@@ -1,0 +1,56 @@
+{
+  "section_title": "Reader Testimonials",
+  "section_subtitle": "Discover what our community of book lovers has to say about their experience.",
+  "reviews": [
+    {
+      "id": 1,
+      "user_name": "Jonathan Reed",
+      "user_image": "https://example.com/profiles/user1.jpg",
+      "occupation": "Software Engineer",
+      "book_reviewed": "The Silent Patient",
+      "rating": 5,
+      "review_text": "An incredible selection! I found a rare first edition that I've been searching for years. The borrowing process is seamless and very user-friendly.",
+      "date": "2026-02-14"
+    },
+    {
+      "id": 2,
+      "user_name": "Sarah Jenkins",
+      "user_image": "https://example.com/profiles/user2.jpg",
+      "occupation": "Literature Student",
+      "book_reviewed": "Pride and Prejudice",
+      "rating": 4.5,
+      "review_text": "I love the 'Editor's Choice' section. It introduced me to authors I never would have picked up otherwise. The UI is clean and very easy to navigate.",
+      "date": "2026-03-01"
+    },
+    {
+      "id": 3,
+      "user_name": "Marcus Thorne",
+      "user_image": "https://example.com/profiles/user3.jpg",
+      "occupation": "Freelance Writer",
+      "book_reviewed": "Atomic Habits",
+      "rating": 5,
+      "review_text": "The membership plans are very affordable. Having access to both physical copies and digital e-books in one place is a game changer for me.",
+      "date": "2026-03-22"
+    },
+    {
+      "id": 4,
+      "user_name": "Elena Rodriguez",
+      "user_image": "https://example.com/profiles/user4.jpg",
+      "occupation": "High School Teacher",
+      "book_reviewed": "The Book Thief",
+      "rating": 4,
+      "review_text": "A fantastic resource for my students. The categorization makes it easy to find age-appropriate material for my classroom projects.",
+      "date": "2026-04-10"
+    },
+    {
+      "id": 5,
+      "user_name": "David Chen",
+      "user_image": "https://example.com/profiles/user5.jpg",
+      "occupation": "Data Scientist",
+      "book_reviewed": "Dune",
+      "rating": 5,
+      "review_text": "The search filters are top-notch. I can filter by genre, year, and even ISBN. It's the most efficient library management system I've used.",
+      "date": "2026-04-28"
+    }
+  ]
+}
