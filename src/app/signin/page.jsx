@@ -17,7 +17,6 @@ import { Router } from "next/router";
 import { RiGoogleFill } from "react-icons/ri";
 
 export default function LoginPages() {
-    
   const onSubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
@@ -36,13 +35,16 @@ export default function LoginPages() {
     });
 
     if (data) {
-    
-
       alert("sigh Up success");
     }
     console.log(data, error, "from sign inpages");
   };
 
+  const handelGoogleSignIn = async () => {
+    const data = await authClient.signIn.social({
+      provider: "google",
+    });
+  };
   return (
     <div className="  w-[500px] px-10 py-20 shadow-xl mx-auto">
       <h1 className="text-2xl font-bold mb-5">Sign In pages</h1>
@@ -133,7 +135,7 @@ export default function LoginPages() {
       </Form>
 
       <p className="text-center mt-10 text-xl font-semibold">Or</p>
-      <Button className={"w-full  mt-5 mb-5"}>
+      <Button onClick={handelGoogleSignIn} className={"w-full  mt-5 mb-5"}>
         <RiGoogleFill /> Sign In with Google
       </Button>
     </div>

@@ -59,13 +59,22 @@ export default function NavBar() {
                 alt="user-avter"
               ></Image>
               <Link href={"/login"}>
-                <Button
+                <h1
                   className={
-                    "bg-[#B9AC92] rounded-xl px-10 text-xl font-medium"
+                    "border rounded-xl px-7 text-xl font-medium"
                   }
                 >
                   Log In
-                </Button>
+                </h1>
+              </Link>
+              <Link href={"/signin"}>
+                <h1
+                  className={
+                    "border rounded-xl px-7 text-xl font-medium"
+                  }
+                >
+                  Sign In
+                </h1>
               </Link>
             </>
           )}

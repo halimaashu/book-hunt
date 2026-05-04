@@ -15,27 +15,32 @@ import Link from "next/link";
 import { RiGoogleFill } from "react-icons/ri";
 
 export default function LoginPages() {
-  const onSubmit =async (e) => {
+  const onSubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
-   const userData = Object.fromEntries(formData.entries());
+    const userData = Object.fromEntries(formData.entries());
     const { email, password } = userData;
     console.log(email, password, "frpm log ig inpages");
 
-
     const { data, error } = await authClient.signIn.email({
-    email: email, // required
-    password: password, // required
-    rememberMe: true,
-    callbackURL: "/",
-});
-console.log(data,error,"from log in pagesss-")
+      email: email, // required
+      password: password, // required
+      rememberMe: true,
+      callbackURL: "/",
+    });
+    console.log(data, error, "from log in pagesss-");
     // alert(`Form submitted with: ${JSON.stringify(data, null, 2)}`);
   };
 
+
+  const handelGoogleSignin=async ()=>{
+     const data = await authClient.signIn.social({
+    provider: "google",
+  });
+  }
   return (
     <div className="  w-[500px] px-10 py-20 shadow-xl mx-auto">
-        <h1 className="text-2xl font-bold mb-5">Log In pages</h1>
+      <h1 className="text-2xl font-bold mb-5">Log In pages</h1>
       <Form className="flex flex-col gap-4" onSubmit={onSubmit}>
         <TextField
           isRequired
@@ -93,7 +98,7 @@ console.log(data,error,"from log in pagesss-")
       </Form>
 
       <p className="text-center mt-10 text-xl font-semibold">Or</p>
-      <Button className={"w-full  mt-5 mb-5"}>
+      <Button onClick={handelGoogleSignin} className={"w-full  mt-5 mb-5"}>
         <RiGoogleFill /> Sign In with Google
       </Button>
       <h1 className="">
