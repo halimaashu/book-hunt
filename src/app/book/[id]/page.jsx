@@ -1,3 +1,4 @@
+import MorrowNawButton from "@/components/ui/MorrowNawButton";
 import { getAllBooks } from "@/lib/data";
 import { Button } from "@heroui/react";
 import Image from "next/image";
@@ -31,7 +32,7 @@ export default async function ViewDetailPage({ params }) {
         <h1 className="text-xl font-semibold text-gray-500">
           Available: {exceptedBooks?.available_quantity} pice
         </h1>
-       
+       <MorrowNawButton/>
       </div>
     </div>
   );
