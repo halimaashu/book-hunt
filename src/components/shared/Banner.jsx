@@ -1,10 +1,18 @@
+"use client";
 import heroBg from "@/assets/hero-bg.jpg";
 import { Button } from "@heroui/react";
 import Image from "next/image";
 import Link from "next/link";
 import { FaFirefoxBrowser } from "react-icons/fa";
 
+import { useSpring, animated } from "@react-spring/web";
 export default function Banner() {
+  const float = useSpring({
+    from: { transform: "translateY(0px)" },
+    to: { transform: "translateY(-20px)" },
+    config: { duration: 2000 },
+    loop: { reverse: true }, // This makes it go back and forth forever
+  });
   return (
     <div className="py-20 flex flex-col md:flex-row items-center justify-between p-5 bg-blue-50 container mx-auto">
       <div className="md:flex-1">
@@ -13,14 +21,17 @@ export default function Banner() {
           BooksHunt
         </h1>
 
-        <p className="font-semibold text-gray-500 mt-5 max-w-xl">
+        <p className="font-semibold text-gray-500 mt-5 max-w-xl animate__animated animate__bounce animate__delay-2s">
           Discover thousands of books across different genres and start your
           next reading journey today.
         </p>
 
         <div className="mt-10 mx-auto w-1/2">
-          <Link href="/allBooks" className="inline-block hover:animate-bounce">
-            <Button className="flex items-center gap-2 bg-[#FFA931]">
+          <Link
+            href="/allBooks"
+            className="inline-block animate__animated animate__bounce"
+          >
+            <Button className="flex items-center gap-2 bg-[#FFA931] ">
               <FaFirefoxBrowser />
               Browse Now
             </Button>
@@ -29,7 +40,10 @@ export default function Banner() {
       </div>
 
       {/* Right Image */}
-      <div className="flex-1 mt-10 md:mt-0 ">
+      <animated.div
+        style={float}
+        className="flex-1 mt-10 md:mt-0  animate__animated animate__bounce__infinite"
+      >
         <Image
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           src={heroBg}
@@ -38,7 +52,7 @@ export default function Banner() {
           alt="hero-banner"
           className="mx-auto rounded-lg shadow-2xl"
         />
-      </div>
+      </animated.div>
     </div>
   );
 }

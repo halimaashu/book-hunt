@@ -1,9 +1,11 @@
 import dns from "node:dns";
 dns.setServers(['8.8.8.8','8.8.4.4']);
 import { Outfit } from "next/font/google";
+import 'animate.css';
 import "./globals.css";
 import NavBar from "@/components/shared/NavBar";
 import Footer from "@/components/shared/Footer";
+
 
 const outfit = Outfit({
   

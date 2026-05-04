@@ -32,14 +32,13 @@ export default function LoginPages() {
     // alert(`Form submitted with: ${JSON.stringify(data, null, 2)}`);
   };
 
-
-  const handelGoogleSignin=async ()=>{
-     const data = await authClient.signIn.social({
-    provider: "google",
-  });
-  }
+  const handelGoogleSignin = async () => {
+    const data = await authClient.signIn.social({
+      provider: "google",
+    });
+  };
   return (
-    <div className="  w-[500px] px-10 py-20 shadow-xl mx-auto">
+    <div className=" max-w-[500px] px-10 py-20 shadow-xl mx-auto p-2">
       <h1 className="text-2xl font-bold mb-5">Log In pages</h1>
       <Form className="flex flex-col gap-4" onSubmit={onSubmit}>
         <TextField

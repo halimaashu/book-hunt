@@ -1,3 +1,4 @@
+import 'animate.css';
 import Banner from "@/components/shared/Banner";
 import Marque from "@/components/shared/Marque";
 import NavBar from "@/components/shared/NavBar";

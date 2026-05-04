@@ -46,7 +46,7 @@ export default function LoginPages() {
     });
   };
   return (
-    <div className="  w-[500px] px-10 py-20 shadow-xl mx-auto">
+    <div className="p-2 max-w-[500px] px-10 py-20 shadow-xl mx-auto">
       <h1 className="text-2xl font-bold mb-5">Sign In pages</h1>
       <Form className="flex flex-col gap-4" onSubmit={onSubmit}>
         <TextField

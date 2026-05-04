@@ -20,7 +20,7 @@ export default function Footer() {
           {" "}
           Books Hunts
         </h1>
-        <div className="flex justify-between mt-10 p-4">
+        <div className="flex flex-col md:flex-row gap-10 md:gap-2 justify-between mt-10 p-4">
           <div className="">
             <h1 className="text-xl font-bold">Services</h1>
             <div className="flex flex-col gap-3 mt-5 text-gray-500 font-semibold">
