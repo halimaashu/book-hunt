@@ -31,13 +31,7 @@ export default async function ViewDetailPage({ params }) {
         <h1 className="text-xl font-semibold text-gray-500">
           Available: {exceptedBooks?.available_quantity} pice
         </h1>
-        <Button
-          className={
-            "text-right flex justify-center items-center mx-auto mt-20 max-w-[200px]"
-          }
-        >
-          Borrow This Book
-        </Button>
+       
       </div>
     </div>
   );
