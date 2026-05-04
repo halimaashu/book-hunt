@@ -10,7 +10,7 @@ export default async function ViewDetailPage({ params }) {
   const data = await getAllBooks();
   const exceptedBooks = data.find((d) => d.id == id);
   return (
-    <div className="container mx-auto py-20 flex items-center gap-10 p-2">
+    <div className="container mx-auto py-20 md:flex items-center gap-10 p-2">
       <div className="">
         <Image
           src={exceptedBooks?.image_url}

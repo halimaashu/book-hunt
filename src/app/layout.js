@@ -1,17 +1,15 @@
 import dns from "node:dns";
-dns.setServers(['8.8.8.8','8.8.4.4']);
+dns.setServers(["8.8.8.8", "8.8.4.4"]);
 import { Outfit } from "next/font/google";
-import 'animate.css';
+import "animate.css";
 import "./globals.css";
 import NavBar from "@/components/shared/NavBar";
 import Footer from "@/components/shared/Footer";
-
+import { ToastContainer } from "react-toastify";
 
 const outfit = Outfit({
-  
   subsets: ["latin"],
 });
-
 
 export const metadata = {
   title: "Create Next App",
@@ -20,17 +18,13 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html
-      lang="en"
-      className={` h-full antialiased`}
-    >
-      <body className={`${outfit.className} min-h-full flex flex-col`} >
-        <NavBar/>
-      <main>
-          {children}
-      </main>
-      <Footer/>
-        </body>
+    <html lang="en" className={` h-full antialiased`}>
+      <body className={`${outfit.className} min-h-full flex flex-col`}>
+        <NavBar />
+        <main>{children}</main>
+        <Footer />
+        <ToastContainer />
+      </body>
     </html>
   );
 }
