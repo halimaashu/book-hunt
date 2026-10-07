@@ -1,114 +1,146 @@
 "use client";
-import icon from "@/assets/bg-logo.png";
-import avater from "@/assets/user.png";
 
-import {
-  Avatar,
-  Button,
-  Drawer,
-  Dropdown,
-  MenuItem,
-  Modal,
-} from "@heroui/react";
-import Image from "next/image";
 import Link from "next/link";
-import MyNextLink from "../ui/MyNextLink";
-import { authClient } from "@/lib/auth-client";
+import { usePathname } from "next/navigation";
+import { useState } from "react";
+import { IoMenuSharp, IoClose } from "react-icons/io5";
+import { FaBookOpen } from "react-icons/fa";
 
-import { PiMessengerLogoDuotone } from "react-icons/pi";
-import { BiMenu } from "react-icons/bi";
+const links = [
+  { label: "Home", href: "/" },
+  { label: "Books", href: "/allBooks" },
+  { label: "Profile", href: "/profile" },
+  { label: "Contact", href: "/contact" },
+];
 
-export default function NavBar() {
-  const handleSignOut = async () => {
-    await authClient.signOut();
-  };
-  const userData = authClient.useSession();
-  const user = userData?.data?.user;
-  console.log(user, "user login data from navbar pages");
+function Logo({ onClick }) {
   return (
-    <div className="bg-base-200 shadow-xl rounded-md p-2">
-      <nav className="flex justify-between container mx-auto  items-center px-5 py-1">
-        <Link href={"/"} className="">
-          <Image src={icon} height={200} width={200} alt={"hero icon"} />
-        </Link>
-        <div className={"hidden md:flex"}>
-          <ul className={"flex gap-4 items-center justify-center"}>
-            <li>
-              <MyNextLink href={"/"}>Home</MyNextLink>
-            </li>
-            <li>
-              <MyNextLink href={"/allBooks"}>All books</MyNextLink>
-            </li>
-            <li>
-              <MyNextLink href={"/profile"}>Profile</MyNextLink>
-            </li>
-          </ul>
-        </div>
-        <div className="flex md:hidden"></div>
-        <div className="flex items-center justify-center gap-5 hidden md:flex">
-          {user ? (
-            <>
-              <h1 className="text-2xl font-bold">{user.name}</h1>
-              <Avatar>
-                <Avatar.Image alt="John Doe" src={user?.image} />
-                <Avatar.Fallback>JD</Avatar.Fallback>
-              </Avatar>
-              <Button onClick={handleSignOut} variant="outline">
-                Log Out
-              </Button>
-            </>
-          ) : (
-            <>
-              {" "}
-              <Image
-                src={avater}
-                height={50}
-                width={50}
-                alt="user-avter"
-              ></Image>
-              <Link href={"/login"}>
-                <h1 className={"border rounded-xl px-7 text-xl font-medium"}>
-                  Log In
-                </h1>
-              </Link>
-              <Link href={"/signin"}>
-                <h1 className={"border rounded-xl px-7 text-xl font-medium"}>
-                  Sign In
-                </h1>
-              </Link>
-            </>
-          )}
-        </div>
-
-        <div className="md:hidden">
-          <details className="list-style-none">
-            <summary className="display-none">
-              <BiMenu />
-            </summary>
-            <ul className={"flex flex-col gap-5 mt-4"}>
-              <li>
-                <MyNextLink href={"/"}>Home</MyNextLink>
-              </li>
-              <li>
-                <MyNextLink href={"/allBooks"}>All books</MyNextLink>
-              </li>
-              <li>
-                <MyNextLink href={"/profile"}>Profile</MyNextLink>
-              </li>
-
-              <Link href={"/login"}>
-                <h1 className={""}>Log In</h1>
-              </Link>
-              <Link href={"/signin"}>
-                <h1 className={""}>Sign In</h1>
-              </Link>
-              <h1 onClick={handleSignOut} variant="outline">
-                Log Out
-              </h1>
-            </ul>
-          </details>
-        </div>
-      </nav>
-    </div>
+    <Link
+      href="/"
+      onClick={onClick}
+      className="flex items-center gap-2 rounded-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-white"
+    >
+      <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-white text-red-600 shadow-md">
+        <FaBookOpen />
+      </span>
+      <span className="text-2xl font-extrabold tracking-tight text-white">
+        Book
+        <span className="ml-0.5 rounded-md bg-white px-1.5 text-red-600">Hunt</span>
+      </span>
+    </Link>
   );
 }
+
+const NavBar = () => {
+  const pathname = usePathname();
+  const [open, setOpen] = useState(false);
+
+  const isActive = (href) =>
+    href === "/" ? pathname === "/" : pathname.startsWith(href);
+
+  return (
+    <header className="sticky top-0 z-50 w-full bg-green-600/95 shadow-lg shadow-green-900/10 backdrop-blur">
+      <nav
+        aria-label="Main navigation"
+        className="container mx-auto flex items-center justify-between px-5 py-3 sm:px-8"
+      >
+        <Logo onClick={() => setOpen(false)} />
+
+        {/* Desktop links */}
+        <ul className="hidden items-center gap-1 md:flex">
+          {links.map(({ label, href }) => (
+            <li key={href}>
+              <Link
+                href={href}
+                aria-current={isActive(href) ? "page" : undefined}
+                className={`rounded-full px-4 py-2 text-sm font-semibold transition focus:outline-none focus-visible:ring-2 focus-visible:ring-white ${
+                  isActive(href)
+                    ? "bg-white text-green-700 shadow"
+                    : "text-white/90 hover:bg-white/15 hover:text-white"
+                }`}
+              >
+                {label}
+              </Link>
+            </li>
+          ))}
+        </ul>
+
+        {/* Desktop auth buttons */}
+        <div className="hidden items-center gap-3 md:flex">
+          <Link
+            href="/login"
+            className="rounded-xl border border-white/70 px-5 py-2 text-sm font-semibold text-white transition hover:bg-white hover:text-green-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-white"
+          >
+            Sign in
+          </Link>
+          <Link
+            href="/signin"
+            className="rounded-xl bg-red-600 px-5 py-2 text-sm font-semibold text-white shadow-md shadow-red-900/20 transition hover:bg-red-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-white"
+          >
+            Sign up
+          </Link>
+        </div>
+
+        {/* Mobile menu button */}
+        <button
+          type="button"
+          onClick={() => setOpen((v) => !v)}
+          aria-label={open ? "Close menu" : "Open menu"}
+          aria-expanded={open}
+          aria-controls="mobile-menu"
+          className="flex h-10 w-10 items-center justify-center rounded-xl bg-white/15 text-2xl text-white transition hover:bg-white/25 focus:outline-none focus-visible:ring-2 focus-visible:ring-white md:hidden"
+        >
+          {open ? <IoClose /> : <IoMenuSharp />}
+        </button>
+      </nav>
+
+      {/* Mobile menu */}
+      <div
+        id="mobile-menu"
+        className={`grid overflow-hidden border-t border-white/15 transition-all duration-300 md:hidden ${
+          open ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] border-transparent opacity-0"
+        }`}
+      >
+        <div className="min-h-0">
+          <ul className="flex flex-col gap-1 px-5 pb-3 pt-3 sm:px-8">
+            {links.map(({ label, href }) => (
+              <li key={href}>
+                <Link
+                  href={href}
+                  onClick={() => setOpen(false)}
+                  aria-current={isActive(href) ? "page" : undefined}
+                  className={`block rounded-xl px-4 py-3 text-base font-semibold transition ${
+                    isActive(href)
+                      ? "bg-white text-green-700"
+                      : "text-white hover:bg-white/15"
+                  }`}
+                >
+                  {label}
+                </Link>
+              </li>
+            ))}
+          </ul>
+
+          <div className="grid grid-cols-2 gap-3 px-5 pb-5 sm:px-8">
+            <Link
+              href="/login"
+              onClick={() => setOpen(false)}
+              className="rounded-xl border border-white/70 px-4 py-3 text-center text-sm font-semibold text-white transition hover:bg-white hover:text-green-700"
+            >
+              Sign in
+            </Link>
+            <Link
+              href="/signin"
+              onClick={() => setOpen(false)}
+              className="rounded-xl bg-red-600 px-4 py-3 text-center text-sm font-semibold text-white shadow-md transition hover:bg-red-700"
+            >
+              Sign up
+            </Link>
+          </div>
+        </div>
+      </div>
+    </header>
+  );
+};
+
+export default NavBar;

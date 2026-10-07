@@ -1,19 +1,25 @@
-import 'animate.css';
 import Banner from "@/components/shared/Banner";
 import Marque from "@/components/shared/Marque";
-import NavBar from "@/components/shared/NavBar";
 import SpeachileBooks from "@/components/shared/SpeachileBooks";
-import UserReview from "@/components/shared/UserReview";
+import SimpleStep from "@/components/shared/SimpleStep";
+import TrustedBooks from "@/components/shared/TrustedBooks";
 import UserreviewMarque from "@/components/shared/UserreviewMarque";
-
+import FAQ from "@/components/shared/FAQ";
 
 export default function Home() {
   return (
-    <div className="">
-     <Banner/>
-     <Marque/>
-     <SpeachileBooks/>
-     <UserreviewMarque/>
+    <div>
+      <Banner />
+      <Marque />
+      <SpeachileBooks />
+
+      <div id="how-it-works">
+        <SimpleStep />
+      </div>
+
+      <TrustedBooks />
+      <UserreviewMarque />
+      <FAQ />
     </div>
   );
 }
