@@ -66,9 +66,9 @@ export default function LoginPages() {
   };
 
   return (
-    <main className="flex min-h-screen bg-white">
-      {/* Left: brand panel (desktop only) */}
-      <aside className="relative hidden w-1/2 overflow-hidden bg-gradient-to-br from-green-600 via-green-700 to-slate-900 p-12 text-white lg:flex lg:flex-col lg:justify-between">
+    <main className="flex min-h-screen bg-white transition-colors duration-300 dark:bg-zinc-950">
+      {/* Left: brand panel (desktop only). Already dark, only slightly deeper in dark mode */}
+      <aside className="relative hidden w-1/2 overflow-hidden bg-gradient-to-br from-green-600 via-green-700 to-slate-900 p-12 text-white dark:from-green-700 dark:via-green-900 dark:to-zinc-950 lg:flex lg:flex-col lg:justify-between">
         <div className="pointer-events-none absolute -right-20 -top-20 h-80 w-80 rounded-full bg-white/10 blur-3xl" />
         <div className="pointer-events-none absolute -bottom-24 -left-10 h-80 w-80 rounded-full bg-red-500/30 blur-3xl" />
 
@@ -104,22 +104,23 @@ export default function LoginPages() {
       </aside>
 
       {/* Right: form */}
-      <section className="flex w-full items-center justify-center bg-slate-50 px-5 py-10 sm:px-8 lg:w-1/2 lg:bg-white">
-        <div className="w-full max-w-md rounded-3xl border border-slate-100 bg-white p-6 shadow-xl shadow-slate-200/60 sm:p-10 lg:border-0 lg:shadow-none lg:p-0">
+      <section className="flex w-full items-center justify-center bg-slate-50 px-5 py-10 transition-colors duration-300 dark:bg-zinc-950 sm:px-8 lg:w-1/2 lg:bg-white dark:lg:bg-zinc-950">
+        {/* Card: on desktop it blends into the section, so the background is transparent there */}
+        <div className="w-full max-w-md rounded-3xl border border-slate-100 bg-white p-6 shadow-xl shadow-slate-200/60 dark:border-slate-800 dark:bg-zinc-900 dark:shadow-black/40 sm:p-10 lg:border-0 lg:bg-transparent lg:p-0 lg:shadow-none dark:lg:bg-transparent">
           {/* Mobile logo */}
           <Link href="/" className="mb-6 flex items-center gap-2 lg:hidden">
             <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-green-600 text-white">
               <FaBookOpen />
             </span>
-            <span className="text-xl font-extrabold text-slate-900">
-              Book<span className="text-red-600">Hunt</span>
+            <span className="text-xl font-extrabold text-slate-900 dark:text-white">
+              Book<span className="text-red-600 dark:text-red-400">Hunt</span>
             </span>
           </Link>
 
-          <h1 className="text-3xl font-extrabold tracking-tight text-slate-900">
+          <h1 className="text-3xl font-extrabold tracking-tight text-slate-900 dark:text-white">
             Log in to your account
           </h1>
-          <p className="mt-2 text-sm text-slate-500">
+          <p className="mt-2 text-sm text-slate-500 dark:text-slate-400">
             Enter your details to continue.
           </p>
 
@@ -127,7 +128,7 @@ export default function LoginPages() {
           {error && (
             <div
               role="alert"
-              className="mt-6 flex items-start gap-3 rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700"
+              className="mt-6 flex items-start gap-3 rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700 dark:border-red-500/30 dark:bg-red-500/10 dark:text-red-300"
             >
               <FiAlertCircle className="mt-0.5 shrink-0 text-lg" />
               {error}
@@ -167,7 +168,7 @@ export default function LoginPages() {
                   type="button"
                   onClick={() => setShowPassword((v) => !v)}
                   aria-label={showPassword ? "Hide password" : "Show password"}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 rounded-md p-1 text-lg text-slate-400 transition hover:text-slate-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-green-500"
+                  className="absolute right-3 top-1/2 -translate-y-1/2 rounded-md p-1 text-lg text-slate-400 transition hover:text-slate-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-green-500 dark:text-slate-500 dark:hover:text-slate-200"
                 >
                   {showPassword ? <FiEyeOff /> : <FiEye />}
                 </button>
@@ -175,12 +176,12 @@ export default function LoginPages() {
               <FieldError />
             </TextField>
 
-            <label className="flex cursor-pointer items-center gap-2 text-sm text-slate-600">
+            <label className="flex cursor-pointer items-center gap-2 text-sm text-slate-600 dark:text-slate-400">
               <input
                 type="checkbox"
                 checked={remember}
                 onChange={(e) => setRemember(e.target.checked)}
-                className="h-4 w-4 rounded border-slate-300 accent-green-600"
+                className="h-4 w-4 rounded border-slate-300 accent-green-600 dark:border-slate-600"
               />
               Remember me
             </label>
@@ -188,7 +189,7 @@ export default function LoginPages() {
             <Button
               type="submit"
               isDisabled={loading || googleLoading}
-              className="w-full rounded-xl bg-[#e7000b] py-6 text-base font-semibold text-white shadow-lg shadow-red-200 transition hover:bg-red-700"
+              className="w-full rounded-xl bg-[#e7000b] py-6 text-base font-semibold text-white shadow-lg shadow-red-200 transition hover:bg-red-700 dark:shadow-red-900/40"
             >
               {loading ? (
                 "Logging in..."
@@ -203,28 +204,28 @@ export default function LoginPages() {
 
           {/* Divider */}
           <div className="my-6 flex items-center gap-4">
-            <span className="h-px flex-1 bg-slate-200" />
-            <span className="text-xs font-semibold uppercase tracking-wider text-slate-400">
+            <span className="h-px flex-1 bg-slate-200 dark:bg-slate-700" />
+            <span className="text-xs font-semibold uppercase tracking-wider text-slate-400 dark:text-slate-500">
               or
             </span>
-            <span className="h-px flex-1 bg-slate-200" />
+            <span className="h-px flex-1 bg-slate-200 dark:bg-slate-700" />
           </div>
 
           <Button
             onClick={handleGoogleSignin}
             isDisabled={loading || googleLoading}
             variant="outline"
-            className="w-full rounded-xl border border-slate-200 bg-white py-6 text-base font-semibold text-slate-700 transition hover:bg-slate-50"
+            className="w-full rounded-xl border border-slate-200 bg-white py-6 text-base font-semibold text-slate-700 transition hover:bg-slate-50 dark:border-slate-700 dark:bg-zinc-800 dark:text-slate-200 dark:hover:bg-zinc-700"
           >
             <RiGoogleFill className="text-lg text-red-500" />
             {googleLoading ? "Connecting..." : "Continue with Google"}
           </Button>
 
-          <p className="mt-8 text-center text-sm text-slate-500">
+          <p className="mt-8 text-center text-sm text-slate-500 dark:text-slate-400">
             Do not have an account?{" "}
             <Link
               href="/signin"
-              className="font-semibold text-red-600 hover:underline"
+              className="font-semibold text-red-600 hover:underline dark:text-red-400"
             >
               Sign up
             </Link>

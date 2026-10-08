@@ -7,6 +7,7 @@ import { authClient } from "@/lib/auth-client";
 import { IoMenuSharp, IoClose } from "react-icons/io5";
 import { FaBookOpen } from "react-icons/fa";
 import { FiLogOut, FiGrid } from "react-icons/fi";
+import { ModeToggle } from "../ui/ModeToggle";
 
 const baseLinks = [
   { label: "Home", href: "/" },
@@ -93,7 +94,7 @@ const NavBar = () => {
   };
 
   return (
-    <header className="sticky top-0 z-50 w-full bg-green-600/95 shadow-lg shadow-green-900/10 backdrop-blur">
+    <header className="sticky top-0 z-50 w-full bg-green-600/95 shadow-lg shadow-green-900/10 backdrop-blur transition-colors duration-300 dark:bg-green-900/95 dark:shadow-black/30">
       <nav
         aria-label="Main navigation"
         className="container mx-auto flex items-center justify-between px-5 py-3 sm:px-8"
@@ -109,7 +110,7 @@ const NavBar = () => {
                 aria-current={isActive(href) ? "page" : undefined}
                 className={`flex items-center gap-1.5 rounded-full px-4 py-2 text-sm font-semibold transition focus:outline-none focus-visible:ring-2 focus-visible:ring-white ${
                   isActive(href)
-                    ? "bg-white text-green-700 shadow"
+                    ? "bg-white text-green-700 shadow dark:bg-zinc-100 dark:text-green-800"
                     : "text-white/90 hover:bg-white/15 hover:text-white"
                 }`}
               >
@@ -122,6 +123,8 @@ const NavBar = () => {
 
         {/* Desktop right side */}
         <div className="hidden items-center gap-3 md:flex">
+          <ModeToggle />
+
           {isPending ? (
             // Placeholder while the session loads (no flash of Sign in buttons)
             <div className="h-10 w-40 animate-pulse rounded-xl bg-white/20" />
@@ -166,17 +169,20 @@ const NavBar = () => {
           )}
         </div>
 
-        {/* Mobile menu button */}
-        <button
-          type="button"
-          onClick={() => setOpen((v) => !v)}
-          aria-label={open ? "Close menu" : "Open menu"}
-          aria-expanded={open}
-          aria-controls="mobile-menu"
-          className="flex h-10 w-10 items-center justify-center rounded-xl bg-white/15 text-2xl text-white transition hover:bg-white/25 focus:outline-none focus-visible:ring-2 focus-visible:ring-white md:hidden"
-        >
-          {open ? <IoClose /> : <IoMenuSharp />}
-        </button>
+        {/* Mobile: theme toggle + menu button */}
+        <div className="flex items-center gap-2 md:hidden">
+          <ModeToggle />
+          <button
+            type="button"
+            onClick={() => setOpen((v) => !v)}
+            aria-label={open ? "Close menu" : "Open menu"}
+            aria-expanded={open}
+            aria-controls="mobile-menu"
+            className="flex h-10 w-10 items-center justify-center rounded-xl bg-white/15 text-2xl text-white transition hover:bg-white/25 focus:outline-none focus-visible:ring-2 focus-visible:ring-white"
+          >
+            {open ? <IoClose /> : <IoMenuSharp />}
+          </button>
+        </div>
       </nav>
 
       {/* Mobile menu */}
@@ -209,7 +215,7 @@ const NavBar = () => {
                   aria-current={isActive(href) ? "page" : undefined}
                   className={`flex items-center gap-2 rounded-xl px-4 py-3 text-base font-semibold transition ${
                     isActive(href)
-                      ? "bg-white text-green-700"
+                      ? "bg-white text-green-700 dark:bg-zinc-100 dark:text-green-800"
                       : "text-white hover:bg-white/15"
                   }`}
                 >

@@ -41,24 +41,24 @@ export default function FAQ() {
   const [openIndex, setOpenIndex] = useState(0);
 
   return (
-    <section className="bg-slate-50 px-4 py-14 sm:px-6 sm:py-20 lg:py-24">
+    <section className="bg-slate-50 px-4 py-14 transition-colors duration-300 dark:bg-zinc-950 sm:px-6 sm:py-20 lg:py-24">
       <div className="container mx-auto grid gap-10 lg:grid-cols-[2fr_3fr] lg:gap-16">
         {/* Left: heading */}
         <div className="text-center lg:sticky lg:top-24 lg:self-start lg:text-left">
-          <p className="inline-flex items-center gap-2 rounded-full bg-red-50 px-4 py-1.5 text-xs font-semibold text-red-700 sm:text-sm">
+          <p className="inline-flex items-center gap-2 rounded-full bg-red-50 px-4 py-1.5 text-xs font-semibold text-red-700 dark:bg-red-500/10 dark:text-red-300 sm:text-sm">
             <FaQuestionCircle />
             FAQ
           </p>
-          <h2 className="mt-5 text-3xl font-extrabold leading-tight tracking-tight text-slate-900 sm:text-4xl lg:text-5xl">
+          <h2 className="mt-5 text-3xl font-extrabold leading-tight tracking-tight text-slate-900 dark:text-white sm:text-4xl lg:text-5xl">
             Questions? We have answers
           </h2>
-          <p className="mx-auto mt-4 max-w-md text-sm leading-relaxed text-slate-600 sm:text-base lg:mx-0">
+          <p className="mx-auto mt-4 max-w-md text-sm leading-relaxed text-slate-600 dark:text-slate-400 sm:text-base lg:mx-0">
             Everything you need to know about ordering, payment and delivery. Cannot
             find your answer? Send us a message.
           </p>
           <Link
             href="/contact"
-            className="mt-6 inline-flex items-center gap-2 rounded-xl bg-slate-900 px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-slate-900/20 transition hover:bg-slate-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-red-500 focus-visible:ring-offset-2"
+            className="mt-6 inline-flex items-center gap-2 rounded-xl bg-slate-900 px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-slate-900/20 transition hover:bg-slate-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-red-500 focus-visible:ring-offset-2 dark:bg-white dark:text-slate-900 dark:shadow-black/30 dark:hover:bg-slate-200 dark:focus-visible:ring-offset-zinc-950"
           >
             <FiMail />
             Contact support
@@ -72,10 +72,10 @@ export default function FAQ() {
             return (
               <div
                 key={item.q}
-                className={`rounded-2xl border bg-white transition-all duration-300 ${
+                className={`rounded-2xl border bg-white transition-all duration-300 dark:bg-zinc-900 ${
                   isOpen
-                    ? "border-green-300 shadow-lg shadow-green-100"
-                    : "border-slate-200 hover:border-slate-300"
+                    ? "border-green-300 shadow-lg shadow-green-100 dark:border-green-500/50 dark:shadow-green-900/20"
+                    : "border-slate-200 hover:border-slate-300 dark:border-slate-800 dark:hover:border-slate-600"
                 }`}
               >
                 <h3>
@@ -89,14 +89,18 @@ export default function FAQ() {
                   >
                     <span
                       className={`text-sm font-semibold sm:text-base ${
-                        isOpen ? "text-green-700" : "text-slate-900"
+                        isOpen
+                          ? "text-green-700 dark:text-green-400"
+                          : "text-slate-900 dark:text-slate-100"
                       }`}
                     >
                       {item.q}
                     </span>
                     <span
                       className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-full transition ${
-                        isOpen ? "bg-green-600 text-white" : "bg-slate-100 text-slate-600"
+                        isOpen
+                          ? "bg-green-600 text-white"
+                          : "bg-slate-100 text-slate-600 dark:bg-zinc-800 dark:text-slate-300"
                       }`}
                     >
                       {isOpen ? <FiMinus /> : <FiPlus />}
@@ -113,7 +117,7 @@ export default function FAQ() {
                   }`}
                 >
                   <div className="overflow-hidden">
-                    <p className="px-5 pb-5 text-sm leading-relaxed text-slate-600 sm:px-6 sm:text-base">
+                    <p className="px-5 pb-5 text-sm leading-relaxed text-slate-600 dark:text-slate-400 sm:px-6 sm:text-base">
                       {item.a}
                     </p>
                   </div>

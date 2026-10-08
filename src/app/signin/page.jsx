@@ -1,7 +1,6 @@
 "use client";
 
 import { authClient } from "@/lib/auth-client";
-import heroBg from "@/assets/hero-bg.jpg";
 import {
   Button,
   FieldError,
@@ -37,6 +36,9 @@ const rules = [
   { label: "1 number", test: (v) => /[0-9]/.test(v) },
 ];
 
+// Empty strength-bar color, with its dark partner (used in two places below)
+const emptyBar = "bg-slate-200 dark:bg-slate-700";
+
 export default function SignUpPage() {
   const router = useRouter();
   const [password, setPassword] = useState("");
@@ -52,7 +54,7 @@ export default function SignUpPage() {
   const passed = rules.filter((r) => r.test(password)).length;
   const score = password ? passed + (/[^A-Za-z0-9]/.test(password) ? 1 : 0) : 0;
   const strength = [
-    { text: "", bar: "bg-slate-200" },
+    { text: "", bar: emptyBar },
     { text: "Weak", bar: "bg-red-500" },
     { text: "Fair", bar: "bg-orange-500" },
     { text: "Good", bar: "bg-yellow-500" },
@@ -101,8 +103,8 @@ export default function SignUpPage() {
   };
 
   return (
-    <main className="flex min-h-screen flex-col bg-slate-50 lg:flex-row lg:bg-white">
-      {/* Image panel: top banner on mobile, left side on desktop */}
+    <main className="flex min-h-screen flex-col bg-slate-50 transition-colors duration-300 dark:bg-zinc-950 lg:flex-row lg:bg-white dark:lg:bg-zinc-950">
+      {/* Image panel: top banner on mobile, left side on desktop (already dark overlay, no change) */}
       <aside className="relative h-44 w-full overflow-hidden sm:h-56 lg:h-auto lg:min-h-screen lg:w-1/2">
         <Image
           src={"/book-hunt-signup-bg.webp"}
@@ -157,19 +159,19 @@ export default function SignUpPage() {
       </aside>
 
       {/* Form */}
-      <section className="relative z-10 -mt-6 flex w-full flex-1 items-center justify-center rounded-t-3xl bg-slate-50 px-5 py-8 sm:px-8 lg:mt-0 lg:w-1/2 lg:rounded-none lg:bg-white lg:py-10">
+      <section className="relative z-10 -mt-6 flex w-full flex-1 items-center justify-center rounded-t-3xl bg-slate-50 px-5 py-8 transition-colors duration-300 dark:bg-zinc-950 sm:px-8 lg:mt-0 lg:w-1/2 lg:rounded-none lg:bg-white lg:py-10 dark:lg:bg-zinc-950">
         <div className="w-full max-w-md">
-          <h1 className="text-3xl font-extrabold tracking-tight text-slate-900">
+          <h1 className="text-3xl font-extrabold tracking-tight text-slate-900 dark:text-white">
             Create your account
           </h1>
-          <p className="mt-2 text-sm text-slate-500">
+          <p className="mt-2 text-sm text-slate-500 dark:text-slate-400">
             Join BooksHunt and start reading today.
           </p>
 
           {error && (
             <div
               role="alert"
-              className="mt-5 flex items-start gap-3 rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700"
+              className="mt-5 flex items-start gap-3 rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700 dark:border-red-500/30 dark:bg-red-500/10 dark:text-red-300"
             >
               <FiAlertCircle className="mt-0.5 shrink-0 text-lg" />
               {error}
@@ -179,7 +181,7 @@ export default function SignUpPage() {
           {success && (
             <div
               role="status"
-              className="mt-5 flex items-start gap-3 rounded-xl border border-green-200 bg-green-50 px-4 py-3 text-sm text-green-700"
+              className="mt-5 flex items-start gap-3 rounded-xl border border-green-200 bg-green-50 px-4 py-3 text-sm text-green-700 dark:border-green-500/30 dark:bg-green-500/10 dark:text-green-300"
             >
               <FiCheckCircle className="mt-0.5 shrink-0 text-lg" />
               Account created! Taking you to the login page...
@@ -230,7 +232,7 @@ export default function SignUpPage() {
             >
               <Label>Photo URL (optional)</Label>
               <div className="flex items-center gap-3">
-                <span className="flex h-11 w-11 shrink-0 items-center justify-center overflow-hidden rounded-full bg-slate-200 text-sm font-bold text-slate-500">
+                <span className="flex h-11 w-11 shrink-0 items-center justify-center overflow-hidden rounded-full bg-slate-200 text-sm font-bold text-slate-500 dark:bg-zinc-800 dark:text-slate-400">
                   {photo && photoOk ? (
                     // eslint-disable-next-line @next/next/no-img-element
                     <img
@@ -276,7 +278,7 @@ export default function SignUpPage() {
                   type="button"
                   onClick={() => setShowPassword((v) => !v)}
                   aria-label={showPassword ? "Hide password" : "Show password"}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 rounded-md p-1 text-lg text-slate-400 transition hover:text-slate-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-green-500"
+                  className="absolute right-3 top-1/2 -translate-y-1/2 rounded-md p-1 text-lg text-slate-400 transition hover:text-slate-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-green-500 dark:text-slate-500 dark:hover:text-slate-200"
                 >
                   {showPassword ? <FiEyeOff /> : <FiEye />}
                 </button>
@@ -289,12 +291,12 @@ export default function SignUpPage() {
                     <span
                       key={i}
                       className={`h-1.5 rounded-full transition-colors duration-300 ${
-                        score >= i ? strength.bar : "bg-slate-200"
+                        score >= i ? strength.bar : emptyBar
                       }`}
                     />
                   ))}
                 </div>
-                <span className="w-12 text-xs font-semibold text-slate-500">
+                <span className="w-12 text-xs font-semibold text-slate-500 dark:text-slate-400">
                   {strength.text}
                 </span>
               </div>
@@ -307,7 +309,9 @@ export default function SignUpPage() {
                     <li
                       key={r.label}
                       className={`flex items-center gap-1.5 text-xs font-medium transition-colors ${
-                        ok ? "text-green-600" : "text-slate-400"
+                        ok
+                          ? "text-green-600 dark:text-green-400"
+                          : "text-slate-400 dark:text-slate-500"
                       }`}
                     >
                       <FiCheck className={ok ? "opacity-100" : "opacity-40"} />
@@ -322,7 +326,7 @@ export default function SignUpPage() {
             <Button
               type="submit"
               isDisabled={loading || googleLoading || success}
-              className="mt-2 w-full rounded-xl bg-[#e7000b] py-6 text-base font-semibold text-white shadow-lg shadow-red-200 transition hover:bg-red-700"
+              className="mt-2 w-full rounded-xl bg-[#e7000b] py-6 text-base font-semibold text-white shadow-lg shadow-red-200 transition hover:bg-red-700 dark:shadow-red-900/40"
             >
               {loading ? (
                 "Creating account..."
@@ -336,26 +340,29 @@ export default function SignUpPage() {
           </Form>
 
           <div className="my-6 flex items-center gap-4">
-            <span className="h-px flex-1 bg-slate-200" />
-            <span className="text-xs font-semibold uppercase tracking-wider text-slate-400">
+            <span className="h-px flex-1 bg-slate-200 dark:bg-slate-700" />
+            <span className="text-xs font-semibold uppercase tracking-wider text-slate-400 dark:text-slate-500">
               or
             </span>
-            <span className="h-px flex-1 bg-slate-200" />
+            <span className="h-px flex-1 bg-slate-200 dark:bg-slate-700" />
           </div>
 
           <Button
             onClick={handleGoogleSignIn}
             isDisabled={loading || googleLoading}
             variant="outline"
-            className="w-full rounded-xl border border-slate-200 bg-white py-6 text-base font-semibold text-slate-700 transition hover:bg-slate-50"
+            className="w-full rounded-xl border border-slate-200 bg-white py-6 text-base font-semibold text-slate-700 transition hover:bg-slate-50 dark:border-slate-700 dark:bg-zinc-800 dark:text-slate-200 dark:hover:bg-zinc-700"
           >
             <RiGoogleFill className="text-lg text-red-500" />
             {googleLoading ? "Connecting..." : "Continue with Google"}
           </Button>
 
-          <p className="mt-6 text-center text-sm text-slate-500">
+          <p className="mt-6 text-center text-sm text-slate-500 dark:text-slate-400">
             Already have an account?{" "}
-            <Link href="/login" className="font-semibold text-red-600 hover:underline">
+            <Link
+              href="/login"
+              className="font-semibold text-red-600 hover:underline dark:text-red-400"
+            >
               Log in
             </Link>
           </p>

@@ -6,6 +6,7 @@ import "./globals.css";
 import NavBar from "@/components/shared/NavBar";
 import Footer from "@/components/shared/Footer";
 import { ToastContainer } from "react-toastify";
+import { ThemeProvider } from "@/components/shared/theme-provider";
 
 const outfit = Outfit({
   subsets: ["latin"],
@@ -18,10 +19,21 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" className={` h-full antialiased`}>
+    // <html lang="en" className={` h-full antialiased`}>
+    <html lang="en" suppressHydrationWarning className="h-full antialiased">
       <body className={`${outfit.className} min-h-full flex flex-col`}>
-        <NavBar />
-        <main>{children}</main>
+         <NavBar />
+            <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+          >
+            <main className="bg-white text-gray-900 dark:bg-zinc-900 dark:text-gray-100">{children}</main>
+
+          </ThemeProvider>
+       
+        
         <Footer />
         <ToastContainer />
       </body>

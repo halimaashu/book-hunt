@@ -34,25 +34,25 @@ const stats = [
 
 const TrustedBooks = () => {
   return (
-    <section className="w-full bg-white px-4 py-12 sm:px-6 sm:py-16 lg:py-24">
+    <section className="w-full  px-4 py-12 transition-colors duration-300 dark:bg-zinc-950 sm:px-6 sm:py-16 lg:py-24">
       <div className="mx-auto max-w-6xl">
         {/* Top: heading + stats */}
         <div className="grid items-center gap-10 lg:grid-cols-2">
           <div>
-            <p className="inline-flex items-center gap-2 rounded-full bg-emerald-50 px-4 py-1.5 text-xs font-semibold text-emerald-700 sm:text-sm">
+            <p className="inline-flex items-center gap-2 rounded-full  px-4 py-1.5 text-xs font-semibold text-emerald-700 dark:bg-emerald-500/10 dark:text-emerald-300 sm:text-sm">
               <BookOpenCheck className="h-4 w-4" />
               Authentic. Verified. Trusted.
             </p>
-            <h2 className="mt-5 text-3xl font-extrabold leading-tight tracking-tight text-slate-900 sm:text-4xl lg:text-5xl">
+            <h2 className="mt-5 text-3xl font-extrabold leading-tight tracking-tight text-slate-900 dark:text-white sm:text-4xl lg:text-5xl">
               Original books you can trust, every single time
             </h2>
-            <p className="mt-4 max-w-xl text-sm leading-relaxed text-slate-600 sm:text-base lg:text-lg">
+            <p className="mt-4 max-w-xl text-sm leading-relaxed text-slate-600 dark:text-slate-400 sm:text-base lg:text-lg">
               We only sell genuine, quality-checked books. If it is not original, it
               is not on our shelf.
             </p>
           </div>
 
-          <div className="grid grid-cols-3 divide-x divide-slate-200 rounded-3xl bg-slate-900 py-6 text-center text-white sm:py-8">
+          <div className="grid grid-cols-3 divide-x divide-slate-200 rounded-3xl bg-slate-900 py-6 text-center text-white dark:divide-slate-700 dark:bg-zinc-900 dark:ring-1 dark:ring-slate-800 sm:py-8">
             {stats.map((s) => (
               <div key={s.label} className="px-2 sm:px-4">
                 <p className="text-xl font-extrabold sm:text-3xl lg:text-4xl">{s.value}</p>
@@ -67,13 +67,17 @@ const TrustedBooks = () => {
           {features.map(({ icon: Icon, title, text }) => (
             <div
               key={title}
-              className="rounded-3xl border border-slate-200 bg-slate-50 p-6 transition hover:border-red-200 hover:bg-white hover:shadow-lg"
+              className="rounded-3xl border border-slate-200 bg-slate-50 p-6 transition hover:border-red-200 hover:bg-white hover:shadow-lg dark:border-slate-800 dark:bg-zinc-900 dark:hover:border-red-500/40 dark:hover:bg-zinc-800 dark:hover:shadow-black/40"
             >
-              <span className="flex h-12 w-12 items-center justify-center rounded-2xl bg-red-600 text-white shadow-md shadow-red-300/50">
+              <span className="flex h-12 w-12 items-center justify-center rounded-2xl bg-red-600 text-white shadow-md shadow-red-300/50 dark:shadow-red-900/50">
                 <Icon className="h-6 w-6" />
               </span>
-              <h3 className="mt-5 text-base font-bold text-slate-900 sm:text-lg">{title}</h3>
-              <p className="mt-2 text-sm leading-relaxed text-slate-600">{text}</p>
+              <h3 className="mt-5 text-base font-bold text-slate-900 dark:text-white sm:text-lg">
+                {title}
+              </h3>
+              <p className="mt-2 text-sm leading-relaxed text-slate-600 dark:text-slate-400">
+                {text}
+              </p>
             </div>
           ))}
         </div>
