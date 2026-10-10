@@ -12,7 +12,7 @@ export default async function SpeachileBooks() {
       <p className="mt-4 text-gray-500 text-base md:text-lg text-center">Discover handpicked books that readers are loving right now.</p>
       <div className=" grid md:grid-cols-2 lg:grid-cols-3 gap-10">
         {specialBooks.map((book) => (
-          <Book key={book.id} book={book} />
+          <Book key={book._id} book={book} />
         ))}
       </div>
     </div>
