@@ -76,7 +76,7 @@ export default function Book({ book }) {
           </Button>
 
           <Link
-            href={`/book/${book?.id}`}
+            href={`/book/${book?._id}`}
             className="group/btn inline-flex items-center justify-center gap-2 rounded-xl bg-green-600 px-3 py-2 text-sm font-semibold text-white shadow-md shadow-green-200 transition hover:bg-green-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-green-500 focus-visible:ring-offset-2 dark:shadow-green-900/40 dark:focus-visible:ring-offset-zinc-900"
           >
             View details

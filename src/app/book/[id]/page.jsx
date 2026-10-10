@@ -7,7 +7,7 @@ import React from "react";
 export default async function ViewDetailPage({ params }) {
   const { id } = await params;
   const data = await getAllBooks();
-  const exceptedBooks = data.find((d) => d.id == id);
+  const exceptedBooks = data.find((d) => d._id == id);
 
   // Shows the 404 page instead of crashing when the book id does not exist
   if (!exceptedBooks) notFound();
@@ -49,3 +49,14 @@ export default async function ViewDetailPage({ params }) {
     </main>
   );
 }
+// import React from 'react';
+
+// const page = () => {
+//   return (
+//     <div>
+//       this is book detail pages
+//     </div>
+//   );
+// };
+
+// export default page;
