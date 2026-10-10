@@ -38,7 +38,8 @@ function Logo({ onClick }) {
 function UserAvatar({ user, size = "h-10 w-10" }) {
   const [failed, setFailed] = useState(false);
   const letter = (user?.name || user?.email || "U")[0].toUpperCase();
-
+// const path=usePathname()
+// console.log(path,"from the nav page please make it more desighfull")
   return (
     <span
       className={`flex ${size} shrink-0 items-center justify-center overflow-hidden rounded-full bg-white text-base font-bold text-green-700 ring-2 ring-white/60`}
@@ -94,7 +95,7 @@ const NavBar = () => {
   };
 
   return (
-    <header className="sticky top-0 z-50 w-full bg-green-600/95 shadow-lg shadow-green-900/10 backdrop-blur transition-colors duration-300 dark:bg-green-900/95 dark:shadow-black/30">
+    <header className={ ` ${pathname.startsWith("/dashboard")?"hidden":"sticky top-0 z-50 w-full bg-green-600/95 shadow-lg shadow-green-900/10 backdrop-blur transition-colors duration-300 dark:bg-green-900/95 dark:shadow-black/30"}`}>
       <nav
         aria-label="Main navigation"
         className="container mx-auto flex items-center justify-between px-5 py-3 sm:px-8"

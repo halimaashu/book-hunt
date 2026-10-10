@@ -1,3 +1,4 @@
+"use client"
 import Link from "next/link";
 import React from "react";
 import { FaBookOpen, FaFacebook, FaLinkedin } from "react-icons/fa";
@@ -5,6 +6,7 @@ import { MdOutgoingMail } from "react-icons/md";
 import { FaMagnifyingGlassLocation } from "react-icons/fa6";
 import { IoLogoWhatsapp } from "react-icons/io";
 import { FiGlobe, FiMail } from "react-icons/fi";
+import { usePathname } from "next/navigation";
 
 const quickLinks = [
   { label: "Home", href: "/" },
@@ -27,9 +29,12 @@ const socials = [
   { label: "Email", href: "mailto:Ashik@gmail.com", icon: MdOutgoingMail, hover: "hover:bg-red-600" },
 ];
 
-export default function Footer() {
+export default  function Footer() {
+  const pathname=usePathname()
+  console.log(pathname)
+
   return (
-    <footer className="relative bg-slate-950 text-slate-300">
+    <footer className={`${pathname.startsWith("/dashboard")?"hidden":"relative bg-slate-950 text-slate-300"}`}>
       {/* Top accent line */}
       <div className="h-1 w-full bg-gradient-to-r from-[#e7000b] via-white/30 to-green-500" />
 
