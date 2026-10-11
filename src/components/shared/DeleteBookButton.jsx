@@ -3,6 +3,7 @@
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { FiTrash2, FiAlertTriangle } from "react-icons/fi";
+import { toast } from "react-toastify";
 
 export default function DeleteBookButton({ id, title }) {
   const router = useRouter();
@@ -14,12 +15,13 @@ export default function DeleteBookButton({ id, title }) {
     setLoading(true);
     setError("");
     try {
-      const res = await fetch(`/api/books/${id}`, { method: "DELETE" });
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}books/${id}`, { method: "DELETE" });
       if (!res.ok) {
         const data = await res.json().catch(() => ({}));
         throw new Error(data?.message || "Could not delete the book.");
       }
       setOpen(false);
+      toast.success("Delete a book Success")
       router.refresh(); // reload the table
     } catch (err) {
       setError(err.message || "Something went wrong.");

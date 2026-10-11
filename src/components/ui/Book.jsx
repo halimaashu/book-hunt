@@ -23,6 +23,15 @@ export default function Book({ book }) {
           style: "bg-green-100 text-green-700 dark:bg-green-500/20 dark:text-green-300",
         };
 
+  // Many books have no price yet, so check before showing it
+  const price = Number(book?.price);
+  const hasPrice =
+    book?.price !== undefined &&
+    book?.price !== null &&
+    book?.price !== "" &&
+    !Number.isNaN(price) &&
+    price > 0;
+
   return (
     <Card className="group flex h-full flex-col overflow-hidden rounded-3xl border border-slate-100 bg-slate-100 p-0 shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-xl dark:border-slate-800 dark:bg-zinc-900 dark:hover:shadow-black/40">
       {/* Image */}
@@ -61,7 +70,19 @@ export default function Book({ book }) {
           {book?.author}
         </p>
 
-        <p className="mt-3 line-clamp-2 text-sm leading-relaxed text-slate-600 dark:text-slate-400">
+        {/* Price (taka). Books without a price show a quiet placeholder so cards stay aligned */}
+        {hasPrice ? (
+          <p className="mt-3 flex items-baseline gap-1 text-2xl font-extrabold text-[#e7000b] dark:text-red-400">
+            <span className="text-xl">৳</span>
+            {price.toLocaleString("en-US")}
+          </p>
+        ) : (
+          <p className="mt-3 text-sm font-medium italic text-slate-400 dark:text-slate-500">
+            Price coming soon
+          </p>
+        )}
+
+        <p className="mt-2 line-clamp-2 text-sm leading-relaxed text-slate-600 dark:text-slate-400">
           {book?.description}
         </p>
 

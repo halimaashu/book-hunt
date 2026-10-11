@@ -14,6 +14,7 @@ import {
   FiEdit2,
   FiEye,
 } from "react-icons/fi";
+import { TbCurrencyTaka } from "react-icons/tb";
 
 const stockBadge = (qty) => {
   if (qty === 0) return { text: "Out of stock", style: "bg-red-100 text-red-700" };
@@ -149,7 +150,7 @@ const page = async ({ searchParams }) => {
                   <Table.Column isRowHeader>Book</Table.Column>
                   <Table.Column>Category</Table.Column>
                   <Table.Column>Stock</Table.Column>
-                  <Table.Column>ID</Table.Column>
+                  <Table.Column>TK</Table.Column>
                   <Table.Column>Actions</Table.Column>
                 </Table.Header>
 
@@ -190,7 +191,7 @@ const page = async ({ searchParams }) => {
 
                         {/* ID */}
                         <Table.Cell>
-                          <span className="text-sm font-medium text-slate-500">#{book.id}</span>
+                          <span className="text-sm font-medium text-slate-500 flex items-center gap-2"><TbCurrencyTaka/>{book.price ||"000"}</span>
                         </Table.Cell>
 
                         {/* Actions */}
@@ -204,7 +205,7 @@ const page = async ({ searchParams }) => {
                               <FiEye />
                             </Link>
                             <Link
-                              href={`/dashboard/admin/books/${book._id}/edit`}
+                              href={`/dashboard/admin/books/${book._id}`}
                               aria-label={`Edit ${book.title}`}
                               className="flex h-9 w-9 items-center justify-center rounded-lg bg-green-50 text-green-600 transition hover:bg-green-600 hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-green-500"
                             >

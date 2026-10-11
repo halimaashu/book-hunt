@@ -19,9 +19,11 @@ import {
   FiCheckCircle,
   FiAlertCircle,
   FiImage,
+  
 } from "react-icons/fi";
+import { TbCurrencyTaka } from "react-icons/tb";
 
-const categories = ["Story", "Tech", "Science", "History", "Fantasy", "Business","Polytechnic"];
+const categories = ["Story", "Tech", "Science", "History", "Fantasy", "Business", "Polytechnic"];
 const MAX_SIZE_MB = 5;
 
 const fieldClass =
@@ -34,6 +36,7 @@ export default function AddBookPage() {
   const [author, setAuthor] = useState("");
   const [category, setCategory] = useState("");
   const [quantity, setQuantity] = useState("");
+  const [price, setPrice] = useState("");
   const [description, setDescription] = useState("");
 
   const [file, setFile] = useState(null);
@@ -89,6 +92,7 @@ export default function AddBookPage() {
     setAuthor("");
     setCategory("");
     setQuantity("");
+    setPrice("");
     setDescription("");
     clearImage();
     setError("");
@@ -124,6 +128,7 @@ export default function AddBookPage() {
           category,
           description: description.trim(),
           available_quantity: Number(quantity),
+          price: Number(price),
           image_url,
         }),
       });
@@ -284,7 +289,7 @@ export default function AddBookPage() {
             </TextField>
 
             {/* Category + quantity */}
-            <div className="grid gap-5 sm:grid-cols-2">
+            <div className="grid gap-5 sm:grid-cols-3">
               <div>
                 <label htmlFor="category" className="mb-1.5 block text-sm font-semibold text-slate-700">
                   Category
@@ -307,6 +312,23 @@ export default function AddBookPage() {
                   ))}
                 </select>
               </div>
+
+              <TextField
+                isRequired
+                name="price"
+                type="number"
+                value={price}
+                onChange={setPrice}
+                validate={(v) =>
+                  v === "" || Number.isNaN(Number(v)) || Number(v) <= 0
+                    ? "Enter a price greater than 0"
+                    : null
+                }
+              >
+                <Label>Price (<TbCurrencyTaka />)</Label>
+                <Input placeholder="e.g. 18.50" min={0} step="0.01" />
+                <FieldError />
+              </TextField>
 
               <TextField
                 isRequired
@@ -411,6 +433,10 @@ export default function AddBookPage() {
                 {title || "Book title"}
               </h3>
               <p className="mt-1 text-sm text-slate-500">{author ? `by ${author}` : "Author name"}</p>
+              <p className="mt-2 text-xl font-extrabold flex items-center gap-2 text-[#e7000b]">
+                <TbCurrencyTaka />
+                {price !== "" && !Number.isNaN(Number(price)) ? `${Number(price).toFixed(2)}` : "$0.00"}
+              </p>
               <p className="mt-3 line-clamp-3 text-sm leading-relaxed text-slate-600">
                 {description || "The description will appear here as you type."}
               </p>
