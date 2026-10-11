@@ -48,9 +48,9 @@ const page = async ({ searchParams }) => {
   });
 
   const stats = [
-    { label: "Total users", value: allUsers.length, icon: FiUsers, color: "bg-blue-100 text-blue-600" },
-    { label: "Admins", value: adminCount, icon: FiShield, color: "bg-red-100 text-red-600" },
-    { label: "Verified emails", value: verifiedCount, icon: FiCheckCircle, color: "bg-green-100 text-green-600" },
+    { label: "Total users", value: allUsers.length, icon: FiUsers, color: "bg-blue-100 text-blue-600 dark:bg-blue-500/20 dark:text-blue-400" },
+    { label: "Admins", value: adminCount, icon: FiShield, color: "bg-red-100 text-red-600 dark:bg-red-500/20 dark:text-red-400" },
+    { label: "Verified emails", value: verifiedCount, icon: FiCheckCircle, color: "bg-green-100 text-green-600 dark:bg-green-500/20 dark:text-green-400" },
   ];
 
   const filterHref = (value) => {
@@ -65,10 +65,10 @@ const page = async ({ searchParams }) => {
     <div className="mx-auto max-w-6xl space-y-6 sm:space-y-8">
       {/* Header */}
       <div>
-        <h1 className="text-2xl font-extrabold tracking-tight text-slate-900 sm:text-3xl">
+        <h1 className="text-2xl font-extrabold tracking-tight text-slate-900 dark:text-white sm:text-3xl">
           Users
         </h1>
-        <p className="mt-1 text-sm text-slate-500">
+        <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">
           See everyone who has an account on BooksHunt.
         </p>
       </div>
@@ -78,14 +78,14 @@ const page = async ({ searchParams }) => {
         {stats.map(({ label, value, icon: Icon, color }) => (
           <div
             key={label}
-            className="flex items-center gap-4 rounded-3xl border border-slate-100 bg-white p-5 shadow-sm"
+            className="flex items-center gap-4 rounded-3xl border border-slate-100 dark:border-zinc-800 bg-white dark:bg-zinc-950 p-5 shadow-sm"
           >
             <span className={`flex h-12 w-12 items-center justify-center rounded-2xl text-xl ${color}`}>
               <Icon />
             </span>
             <div>
-              <p className="text-2xl font-extrabold text-slate-900">{value}</p>
-              <p className="text-sm text-slate-500">{label}</p>
+              <p className="text-2xl font-extrabold text-slate-900 dark:text-white">{value}</p>
+              <p className="text-sm text-slate-500 dark:text-slate-400">{label}</p>
             </div>
           </div>
         ))}
@@ -100,8 +100,8 @@ const page = async ({ searchParams }) => {
               href={filterHref(f.value)}
               className={`rounded-full px-5 py-2 text-sm font-semibold transition ${
                 role === f.value
-                  ? "bg-green-600 text-white shadow-md shadow-green-200"
-                  : "border border-slate-200 bg-white text-slate-600 hover:border-green-300 hover:text-green-700"
+                  ? "bg-green-600 text-white shadow-md shadow-green-200 dark:shadow-green-900/40"
+                  : "border border-slate-200 bg-white text-slate-600 dark:text-slate-300 hover:border-green-300 hover:text-green-700 dark:border-zinc-700 dark:bg-zinc-950 dark:hover:border-green-500 dark:hover:text-green-400"
               }`}
             >
               {f.label}
@@ -112,7 +112,7 @@ const page = async ({ searchParams }) => {
         {/* Plain GET form: works in a server component with no JavaScript */}
         <form
           method="get"
-          className="flex w-full items-center gap-2 rounded-2xl border border-slate-200 bg-white p-1.5 shadow-sm lg:max-w-sm"
+          className="flex w-full items-center gap-2 rounded-2xl border border-slate-200 bg-white p-1.5 shadow-sm dark:border-zinc-700 dark:bg-zinc-950 lg:max-w-sm"
         >
           {role && <input type="hidden" name="role" value={role} />}
           <FiSearch className="ml-3 shrink-0 text-lg text-slate-400" />
@@ -121,11 +121,11 @@ const page = async ({ searchParams }) => {
             type="text"
             defaultValue={query}
             placeholder="Search by name or email..."
-            className="min-w-0 flex-1 bg-transparent px-1 py-2 text-sm placeholder:text-slate-400 focus:outline-none"
+            className="min-w-0 flex-1 bg-transparent px-1 py-2 text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none dark:text-white"
           />
           <button
             type="submit"
-            className="rounded-xl bg-slate-900 px-4 py-2 text-sm font-semibold text-white transition hover:bg-slate-800"
+            className="rounded-xl bg-slate-900 px-4 py-2 text-sm font-semibold text-white transition hover:bg-slate-800 dark:bg-green-600 dark:hover:bg-green-700"
           >
             Search
           </button>
@@ -134,10 +134,10 @@ const page = async ({ searchParams }) => {
 
       {/* Table */}
       {users.length > 0 ? (
-        <section className="overflow-hidden rounded-3xl border border-slate-100 bg-white shadow-sm">
-          <Table>
+        <section className="overflow-hidden rounded-3xl border border-slate-100 dark:border-zinc-800 bg-white dark:bg-zinc-950 shadow-sm">
+          <Table aria-label="Horizontal scroll table">
             <Table.ScrollContainer>
-              <Table.Content aria-label="All users table" className="min-w-[760px]">
+              <Table.Content aria-label="All users table" className="">
                 <Table.Header>
                   <Table.Column isRowHeader>User</Table.Column>
                   <Table.Column>Role</Table.Column>
@@ -169,10 +169,10 @@ const page = async ({ searchParams }) => {
                               )}
                             </span>
                             <div className="min-w-0">
-                              <p className="truncate font-semibold text-slate-900">
+                              <p className="truncate font-semibold text-slate-900 dark:text-white">
                                 {user.name}
                               </p>
-                              <p className="truncate text-xs text-slate-500">{user.email}</p>
+                              <p className="truncate text-xs text-slate-500 dark:text-slate-400">{user.email}</p>
                             </div>
                           </div>
                         </Table.Cell>
@@ -182,8 +182,8 @@ const page = async ({ searchParams }) => {
                           <span
                             className={`inline-flex rounded-full px-3 py-1 text-xs font-bold ${
                               isAdmin
-                                ? "bg-red-100 text-red-700"
-                                : "bg-green-100 text-green-700"
+                                ? "bg-red-100 text-red-700 dark:bg-red-500/20 dark:text-red-300"
+                                : "bg-green-100 text-green-700 dark:bg-green-500/20 dark:text-green-300"
                             }`}
                           >
                             {isAdmin ? "Admin" : "User"}
@@ -194,7 +194,7 @@ const page = async ({ searchParams }) => {
                         <Table.Cell>
                           <span
                             className={`inline-flex items-center gap-1.5 text-sm font-medium ${
-                              user.emailVerified ? "text-green-600" : "text-amber-600"
+                              user.emailVerified ? "text-green-600 dark:text-green-400" : "text-amber-600 dark:text-amber-400"
                             }`}
                           >
                             {user.emailVerified ? <FiCheckCircle /> : <FiAlertCircle />}
@@ -206,7 +206,7 @@ const page = async ({ searchParams }) => {
                         <Table.Cell>
                           <span
                             className={`inline-flex items-center gap-1.5 text-sm font-medium ${
-                              user.two_factor_enabled ? "text-green-600" : "text-slate-400"
+                              user.two_factor_enabled ? "text-green-600 dark:text-green-400" : "text-slate-400 dark:text-slate-500"
                             }`}
                           >
                             <FiLock />
@@ -216,14 +216,14 @@ const page = async ({ searchParams }) => {
 
                         {/* Language */}
                         <Table.Cell>
-                          <span className="rounded-md bg-slate-100 px-2 py-1 text-xs font-bold uppercase text-slate-600">
+                          <span className="rounded-md bg-slate-100 dark:bg-zinc-800 px-2 py-1 text-xs font-bold uppercase text-slate-600 dark:text-slate-300">
                             {user.lang || "en"}
                           </span>
                         </Table.Cell>
 
                         {/* Joined */}
                         <Table.Cell>
-                          <span className="text-sm text-slate-600">
+                          <span className="text-sm text-slate-600 dark:text-slate-300">
                             {formatDate(user.createdAt)}
                           </span>
                         </Table.Cell>
@@ -235,25 +235,25 @@ const page = async ({ searchParams }) => {
             </Table.ScrollContainer>
 
             <Table.Footer>
-              <p className="px-5 py-4 text-sm text-slate-500">
-                Showing <span className="font-bold text-slate-900">{users.length}</span> of{" "}
+              <p className="px-5 py-4 text-sm text-slate-500 dark:text-slate-400">
+                Showing <span className="font-bold text-slate-900 dark:text-white">{users.length}</span> of{" "}
                 {allUsers.length} users
               </p>
             </Table.Footer>
           </Table>
         </section>
       ) : (
-        <div className="mx-auto max-w-md rounded-3xl border border-dashed border-slate-300 bg-white px-6 py-14 text-center">
-          <span className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-slate-100 text-2xl text-slate-400">
+        <div className="mx-auto max-w-md rounded-3xl border border-dashed border-slate-300 bg-white dark:border-zinc-700 dark:bg-zinc-950 px-6 py-14 text-center">
+          <span className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-slate-100 dark:bg-zinc-800 text-2xl text-slate-400">
             <FiSearch />
           </span>
-          <h2 className="mt-5 text-lg font-bold text-slate-900">No users found</h2>
-          <p className="mt-2 text-sm text-slate-500">
+          <h2 className="mt-5 text-lg font-bold text-slate-900 dark:text-white">No users found</h2>
+          <p className="mt-2 text-sm text-slate-500 dark:text-slate-400">
             Try a different name or email, or clear the filters.
           </p>
           <Link
             href="/dashboard/admin/users"
-            className="mt-6 inline-flex items-center gap-2 rounded-xl bg-slate-900 px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-slate-800"
+            className="mt-6 inline-flex items-center gap-2 rounded-xl bg-slate-900 px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-slate-800 dark:bg-green-600 dark:hover:bg-green-700"
           >
             <FiX />
             Clear filters

@@ -17,6 +17,7 @@ import {
   FiHome,
 } from "react-icons/fi";
 import { FaBookOpen } from "react-icons/fa";
+import { ModeToggle } from "@/components/ui/ModeToggle";
 
 // Sidebar links for each role (create these pages as you build them)
 const userNav = [
@@ -96,7 +97,7 @@ export default function DashboardLayout({ children }) {
 
   if (isPending || !user) {
     return (
-      <div className="flex min-h-screen items-center justify-center bg-slate-50">
+      <div className="flex min-h-screen items-center justify-center bg-slate-50 dark:bg-zinc-950">
         <div className="h-10 w-10 animate-spin rounded-full border-4 border-green-600 border-t-transparent" />
       </div>
     );
@@ -104,27 +105,27 @@ export default function DashboardLayout({ children }) {
 
   // Sidebar content is shared by desktop and mobile
   const sidebar = (
-    <div className="flex h-full flex-col bg-slate-900 text-slate-300">
+    <div className="flex h-full flex-col border-r border-slate-200 bg-white text-slate-600 dark:border-zinc-800 dark:bg-zinc-950 dark:text-slate-300">
       <div className="flex h-16 shrink-0 items-center justify-between px-5">
         <Link href="/" className="flex items-center gap-2" onClick={() => setOpen(false)}>
           <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-green-600 text-white">
             <FaBookOpen />
           </span>
-          <span className="text-xl font-extrabold text-white">
-            Book<span className="ml-0.5 rounded-md bg-red-600 px-1.5">Hunt</span>
+          <span className="text-xl font-extrabold text-slate-900 dark:text-white">
+            Book<span className="ml-0.5 rounded-md bg-red-600 px-1.5 text-white">Hunt</span>
           </span>
         </Link>
         <button
           type="button"
           onClick={() => setOpen(false)}
           aria-label="Close menu"
-          className="rounded-lg p-2 text-xl text-slate-400 hover:bg-white/10 lg:hidden"
+          className="rounded-lg p-2 text-xl text-slate-500 hover:bg-slate-100 dark:text-slate-400 dark:hover:bg-white/10 lg:hidden"
         >
           <FiX />
         </button>
       </div>
 
-      <p className="px-6 pb-2 pt-4 text-xs font-semibold uppercase tracking-wider text-slate-500">
+      <p className="px-6 pb-2 pt-4 text-xs font-semibold uppercase tracking-wider text-slate-400 dark:text-slate-500">
         {isAdmin ? "Admin panel" : "My account"}
       </p>
 
@@ -140,8 +141,8 @@ export default function DashboardLayout({ children }) {
               aria-current={active ? "page" : undefined}
               className={`flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-semibold transition ${
                 active
-                  ? "bg-green-600 text-white shadow-lg shadow-green-900/30"
-                  : "hover:bg-white/10 hover:text-white"
+                  ? "bg-green-600 text-white shadow-lg shadow-green-200 dark:shadow-green-900/30"
+                  : "hover:bg-slate-100 hover:text-slate-900 dark:hover:bg-white/10 dark:hover:text-white"
               }`}
             >
               <Icon className="text-lg" />
@@ -151,21 +152,25 @@ export default function DashboardLayout({ children }) {
         })}
       </nav>
 
-      <div className="space-y-3 border-t border-white/10 p-4">
+      <div className="space-y-3 border-t border-slate-200 p-4 dark:border-white/10">
         <Link
           href="/"
           onClick={() => setOpen(false)}
-          className="flex items-center gap-3 rounded-xl px-4 py-2.5 text-sm font-semibold transition hover:bg-white/10 hover:text-white"
+          className="flex items-center gap-3 rounded-xl px-4 py-2.5 text-sm font-semibold transition hover:bg-slate-100 hover:text-slate-900 dark:hover:bg-white/10 dark:hover:text-white"
         >
           <FiHome className="text-lg" />
           Back to website
         </Link>
 
-        <div className="flex items-center gap-3 rounded-xl bg-white/5 p-3">
+        <ModeToggle />
+
+        <div className="flex items-center gap-3 rounded-xl bg-slate-100 p-3 dark:bg-white/5">
           <Avatar user={user} />
           <div className="min-w-0 flex-1">
-            <p className="truncate text-sm font-bold text-white">{user.name}</p>
-            <p className="truncate text-xs text-slate-400">{isAdmin ? "Admin" : "Reader"}</p>
+            <p className="truncate text-sm font-bold text-slate-900 dark:text-white">{user.name}</p>
+            <p className="truncate text-xs text-slate-500 dark:text-slate-400">
+              {isAdmin ? "Admin" : "Reader"}
+            </p>
           </div>
         </div>
 
@@ -183,7 +188,7 @@ export default function DashboardLayout({ children }) {
   );
 
   return (
-    <div className="min-h-screen bg-slate-50">
+    <div className="min-h-screen bg-slate-50 text-slate-900 transition-colors duration-300 dark:bg-zinc-900 dark:text-slate-100">
       {/* Desktop sidebar */}
       <aside className="fixed inset-y-0 left-0 z-40 hidden w-64 lg:block">{sidebar}</aside>
 
@@ -210,26 +215,30 @@ export default function DashboardLayout({ children }) {
       {/* Main area */}
       <div className="lg:pl-64">
         {/* Top bar */}
-        <header className="sticky top-0 z-30 flex h-16 items-center justify-between border-b border-slate-200 bg-white/90 px-4 backdrop-blur sm:px-8">
+        <header className="sticky top-0 z-30 flex h-16 items-center justify-between border-b border-slate-200 bg-white/90 px-4 backdrop-blur transition-colors duration-300 dark:border-zinc-800 dark:bg-zinc-950/90 sm:px-8">
           <div className="flex items-center gap-3">
             <button
               type="button"
               onClick={() => setOpen(true)}
               aria-label="Open menu"
-              className="flex h-10 w-10 items-center justify-center rounded-xl bg-slate-100 text-xl text-slate-700 transition hover:bg-slate-200 lg:hidden"
+              className="flex h-10 w-10 items-center justify-center rounded-xl bg-slate-100 text-xl text-slate-700 transition hover:bg-slate-200 dark:bg-zinc-800 dark:text-slate-200 dark:hover:bg-zinc-700 lg:hidden"
             >
               <FiMenu />
             </button>
             <div>
-              <p className="text-xs text-slate-500">Welcome back</p>
-              <p className="text-sm font-bold text-slate-900 sm:text-base">{user.name}</p>
+              <p className="text-xs text-slate-500 dark:text-slate-400">Welcome back</p>
+              <p className="text-sm font-bold text-slate-900 dark:text-white sm:text-base">
+                {user.name}
+              </p>
             </div>
           </div>
 
           <div className="flex items-center gap-3">
             <span
               className={`hidden rounded-full px-3 py-1 text-xs font-bold sm:inline-block ${
-                isAdmin ? "bg-red-100 text-red-700" : "bg-green-100 text-green-700"
+                isAdmin
+                  ? "bg-red-100 text-red-700 dark:bg-red-500/20 dark:text-red-300"
+                  : "bg-green-100 text-green-700 dark:bg-green-500/20 dark:text-green-300"
               }`}
             >
               {isAdmin ? "Admin" : "Reader"}

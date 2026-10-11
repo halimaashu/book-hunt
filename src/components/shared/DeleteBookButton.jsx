@@ -3,7 +3,6 @@
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { FiTrash2, FiAlertTriangle } from "react-icons/fi";
-import { toast } from "react-toastify";
 
 export default function DeleteBookButton({ id, title }) {
   const router = useRouter();
@@ -15,13 +14,12 @@ export default function DeleteBookButton({ id, title }) {
     setLoading(true);
     setError("");
     try {
-      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}books/${id}`, { method: "DELETE" });
+      const res = await fetch(`/api/books/${id}`, { method: "DELETE" });
       if (!res.ok) {
         const data = await res.json().catch(() => ({}));
         throw new Error(data?.message || "Could not delete the book.");
       }
       setOpen(false);
-      toast.success("Delete a book Success")
       router.refresh(); // reload the table
     } catch (err) {
       setError(err.message || "Something went wrong.");
@@ -36,7 +34,7 @@ export default function DeleteBookButton({ id, title }) {
         type="button"
         onClick={() => setOpen(true)}
         aria-label={`Delete ${title}`}
-        className="flex h-9 w-9 items-center justify-center rounded-lg bg-red-50 text-red-600 transition hover:bg-red-600 hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-red-500"
+        className="flex h-9 w-9 items-center justify-center rounded-lg bg-red-50 text-red-600 transition dark:bg-red-500/20 dark:text-red-400 hover:bg-red-600 hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-red-500"
       >
         <FiTrash2 />
       </button>
@@ -51,21 +49,21 @@ export default function DeleteBookButton({ id, title }) {
             aria-modal="true"
             aria-labelledby="delete-title"
             onClick={(e) => e.stopPropagation()}
-            className="w-full max-w-md rounded-3xl bg-white p-6 shadow-2xl sm:p-8"
+            className="w-full max-w-md rounded-3xl bg-white p-6 shadow-2xl dark:border dark:border-zinc-800 dark:bg-zinc-950 sm:p-8"
           >
-            <span className="flex h-14 w-14 items-center justify-center rounded-full bg-red-100 text-2xl text-red-600">
+            <span className="flex h-14 w-14 items-center justify-center rounded-full bg-red-100 text-2xl text-red-600 dark:bg-red-500/20 dark:text-red-400">
               <FiAlertTriangle />
             </span>
-            <h2 id="delete-title" className="mt-4 text-xl font-extrabold text-slate-900">
+            <h2 id="delete-title" className="mt-4 text-xl font-extrabold text-slate-900 dark:text-white">
               Delete this book?
             </h2>
-            <p className="mt-2 text-sm text-slate-600">
-              <span className="font-semibold text-slate-900">{title}</span> will be removed
+            <p className="mt-2 text-sm text-slate-600 dark:text-slate-300">
+              <span className="font-semibold text-slate-900 dark:text-white">{title}</span> will be removed
               from the store. This cannot be undone.
             </p>
 
             {error && (
-              <p role="alert" className="mt-4 rounded-xl bg-red-50 px-4 py-3 text-sm text-red-700">
+              <p role="alert" className="mt-4 rounded-xl bg-red-50 px-4 py-3 text-sm text-red-700 dark:bg-red-500/20 dark:text-red-300">
                 {error}
               </p>
             )}
@@ -75,7 +73,7 @@ export default function DeleteBookButton({ id, title }) {
                 type="button"
                 onClick={() => setOpen(false)}
                 disabled={loading}
-                className="rounded-xl border border-slate-200 px-5 py-2.5 text-sm font-semibold text-slate-700 transition hover:bg-slate-50 disabled:opacity-50"
+                className="rounded-xl border border-slate-200 dark:border-zinc-700 px-5 py-2.5 text-sm font-semibold text-slate-700 dark:text-slate-200 transition hover:bg-slate-50 dark:hover:bg-zinc-800 disabled:opacity-50"
               >
                 Cancel
               </button>

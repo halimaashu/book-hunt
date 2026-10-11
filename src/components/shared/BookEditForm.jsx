@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { Form, Button, TextField, TextArea, Label, Input, FieldError } from '@heroui/react';
+import { toast } from 'react-toastify';
 
 const CATEGORIES = ['Story', 'Tech', 'Science', 'History', 'Fantasy', 'Business', 'Polytechnic'];
 
@@ -34,14 +35,15 @@ const BookEditForm = ({ book }) => {
 
     try {
       setSaving(true);
-      const res = await fetch(`${API}/books/${book._id}`, {
-        method: 'PUT', // change to PATCH if your Express route uses PATCH
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}books/${book._id}`, {
+        method: 'PATCH', // change to PATCH if your Express route uses PATCH
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload),
       });
       if (!res.ok) throw new Error('Update failed');
 
       setMessage({ type: 'success', text: 'Book updated successfully.' });
+      toast.success("Update Book Data Success full")
       router.refresh();
     } catch (err) {
       setMessage({ type: 'error', text: 'Could not update the book. Please try again.' });

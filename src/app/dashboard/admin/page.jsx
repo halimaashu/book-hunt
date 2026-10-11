@@ -107,17 +107,17 @@ const recentOrders = [
 ];
 
 const activity = [
-  { text: "New user Nusrat Jahan signed up", time: "2 min ago", icon: FiUserPlus, color: "bg-blue-100 text-blue-600" },
-  { text: "Order BH-1042 was placed", time: "9 min ago", icon: FiShoppingBag, color: "bg-green-100 text-green-600" },
-  { text: "AI Revolution is running low (3 left)", time: "34 min ago", icon: FiPackage, color: "bg-amber-100 text-amber-600" },
-  { text: "New 5-star review on Quantum Basics", time: "1 hour ago", icon: FiStar, color: "bg-red-100 text-red-600" },
+  { text: "New user Nusrat Jahan signed up", time: "2 min ago", icon: FiUserPlus, color: "bg-blue-100 text-blue-600 dark:bg-blue-500/20 dark:text-blue-400" },
+  { text: "Order BH-1042 was placed", time: "9 min ago", icon: FiShoppingBag, color: "bg-green-100 text-green-600 dark:bg-green-500/20 dark:text-green-400" },
+  { text: "AI Revolution is running low (3 left)", time: "34 min ago", icon: FiPackage, color: "bg-amber-100 text-amber-600 dark:bg-amber-500/20 dark:text-amber-400" },
+  { text: "New 5-star review on Quantum Basics", time: "1 hour ago", icon: FiStar, color: "bg-red-100 text-red-600 dark:bg-red-500/20 dark:text-red-400" },
 ];
 
 const statusStyle = {
-  Processing: "bg-amber-100 text-amber-700",
-  Shipped: "bg-blue-100 text-blue-700",
-  Delivered: "bg-green-100 text-green-700",
-  Cancelled: "bg-red-100 text-red-700",
+  Processing: "bg-amber-100 text-amber-700 dark:bg-amber-500/20 dark:text-amber-300",
+  Shipped: "bg-blue-100 text-blue-700 dark:bg-blue-500/20 dark:text-blue-300",
+  Delivered: "bg-green-100 text-green-700 dark:bg-green-500/20 dark:text-green-300",
+  Cancelled: "bg-red-100 text-red-700 dark:bg-red-500/20 dark:text-red-300",
 };
 
 const spark = (arr) => arr.map((v, i) => ({ i, v }));
@@ -126,11 +126,11 @@ const stats = [
   {
     label: "Total revenue",
     value: 48250,
-    prefix: "$",
+    prefix: "৳",
     change: 12.4,
     icon: FiDollarSign,
     color: "#16a34a",
-    soft: "bg-green-100 text-green-600",
+    soft: "bg-green-100 text-green-600 dark:bg-green-500/20 dark:text-green-400",
     data: spark([12, 18, 15, 24, 22, 30, 28, 36, 42]),
   },
   {
@@ -139,7 +139,7 @@ const stats = [
     change: 8.1,
     icon: FiShoppingBag,
     color: "#2563eb",
-    soft: "bg-blue-100 text-blue-600",
+    soft: "bg-blue-100 text-blue-600 dark:bg-blue-500/20 dark:text-blue-400",
     data: spark([20, 24, 22, 30, 28, 34, 40, 38, 46]),
   },
   {
@@ -148,7 +148,7 @@ const stats = [
     change: 5.7,
     icon: FiUsers,
     color: "#8b5cf6",
-    soft: "bg-purple-100 text-purple-600",
+    soft: "bg-purple-100 text-purple-600 dark:bg-purple-500/20 dark:text-purple-400",
     data: spark([10, 12, 14, 13, 18, 20, 22, 26, 29]),
   },
   {
@@ -157,7 +157,7 @@ const stats = [
     change: -2.3,
     icon: FiBook,
     color: "#e7000b",
-    soft: "bg-red-100 text-red-600",
+    soft: "bg-red-100 text-red-600 dark:bg-red-500/20 dark:text-red-400",
     data: spark([30, 28, 31, 29, 27, 28, 26, 25, 24]),
   },
 ];
@@ -206,12 +206,12 @@ function Reveal({ delay = 0, className = "", children }) {
 function ChartTooltip({ active, payload, label, money }) {
   if (!active || !payload?.length) return null;
   return (
-    <div className="rounded-xl border border-slate-100 bg-white px-4 py-3 shadow-xl">
+    <div className="rounded-xl border border-slate-100 dark:border-zinc-800 bg-white px-4 py-3 shadow-xl dark:border-zinc-700 dark:bg-zinc-900">
       <p className="text-xs font-semibold text-slate-400">{label}</p>
       {payload.map((p) => (
-        <p key={p.dataKey} className="mt-1 flex items-center gap-2 text-sm font-bold text-slate-900">
+        <p key={p.dataKey} className="mt-1 flex items-center gap-2 text-sm font-bold text-slate-900 dark:text-white">
           <span className="h-2.5 w-2.5 rounded-full" style={{ background: p.color || p.stroke || p.fill }} />
-          {p.name}: {money && p.dataKey === "revenue" ? `$${p.value.toLocaleString()}` : p.value}
+          {p.name}: {money && p.dataKey === "revenue" ? `৳${p.value.toLocaleString()}` : p.value}
         </p>
       ))}
     </div>
@@ -226,14 +226,14 @@ function StatCard({ stat, delay }) {
 
   return (
     <Reveal delay={delay}>
-      <div className="group relative overflow-hidden rounded-3xl border border-slate-100 bg-white p-5 shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-xl sm:p-6">
+      <div className="group relative overflow-hidden rounded-3xl border border-slate-100 bg-white dark:border-zinc-800 dark:bg-zinc-950 p-5 shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-xl sm:p-6">
         <div className="flex items-start justify-between">
           <span className={`flex h-11 w-11 items-center justify-center rounded-2xl text-xl ${stat.soft}`}>
             <Icon />
           </span>
           <span
             className={`inline-flex items-center gap-1 rounded-full px-2.5 py-1 text-xs font-bold ${
-              up ? "bg-green-100 text-green-700" : "bg-red-100 text-red-700"
+              up ? "bg-green-100 text-green-700 dark:bg-green-500/20 dark:text-green-300" : "bg-red-100 text-red-700 dark:bg-red-500/20 dark:text-red-300"
             }`}
           >
             {up ? <FiTrendingUp /> : <FiTrendingDown />}
@@ -241,11 +241,11 @@ function StatCard({ stat, delay }) {
           </span>
         </div>
 
-        <p className="mt-4 text-2xl font-extrabold text-slate-900 sm:text-3xl">
+        <p className="mt-4 text-2xl font-extrabold text-slate-900 dark:text-white sm:text-3xl">
           {stat.prefix}
           {count.toLocaleString()}
         </p>
-        <p className="text-xs text-slate-500 sm:text-sm">{stat.label}</p>
+        <p className="text-xs text-slate-500 dark:text-slate-400 sm:text-sm">{stat.label}</p>
 
         {/* Sparkline */}
         <div className="mt-3 h-12 w-full">
@@ -342,20 +342,20 @@ export default function AdminOverviewPage() {
       {/* Revenue chart + category donut */}
       <section className="grid gap-6 lg:grid-cols-[2fr_1fr] sm:gap-8">
         <Reveal delay={500}>
-          <div className="h-full rounded-3xl border border-slate-100 bg-white p-5 shadow-sm sm:p-8">
+          <div className="h-full rounded-3xl border border-slate-100 bg-white dark:border-zinc-800 dark:bg-zinc-950 p-5 shadow-sm sm:p-8">
             <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
               <div>
-                <h2 className="text-lg font-extrabold text-slate-900">Revenue overview</h2>
-                <p className="mt-1 text-sm text-slate-500">
-                  <span className="text-2xl font-extrabold text-slate-900">
-                    ${totalRevenue.toLocaleString()}
+                <h2 className="text-lg font-extrabold text-slate-900 dark:text-white">Revenue overview</h2>
+                <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">
+                  <span className="text-2xl font-extrabold text-slate-900 dark:text-white">
+                    ৳{totalRevenue.toLocaleString()}
                   </span>{" "}
                   from {totalOrders.toLocaleString()} orders
                 </p>
               </div>
 
               {/* Range tabs */}
-              <div className="flex w-fit rounded-xl bg-slate-100 p-1">
+              <div className="flex w-fit rounded-xl bg-slate-100 dark:bg-zinc-800 p-1">
                 {ranges.map((r) => (
                   <button
                     key={r.key}
@@ -363,8 +363,8 @@ export default function AdminOverviewPage() {
                     onClick={() => setRange(r.key)}
                     className={`rounded-lg px-3 py-1.5 text-xs font-semibold transition sm:px-4 sm:text-sm ${
                       range === r.key
-                        ? "bg-white text-green-700 shadow"
-                        : "text-slate-500 hover:text-slate-800"
+                        ? "bg-white text-green-700 shadow dark:bg-zinc-700 dark:text-green-400"
+                        : "text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-white"
                     }`}
                   >
                     {r.label}
@@ -373,7 +373,7 @@ export default function AdminOverviewPage() {
               </div>
             </div>
 
-            <div className="mt-6 h-72 w-full sm:h-80">
+            <div className="mt-6 h-72 w-full text-slate-200 dark:text-zinc-800 sm:h-80">
               <ResponsiveContainer width="100%" height="100%">
                 {/* key makes the chart animate again when the range changes */}
                 <AreaChart key={range} data={data} margin={{ top: 10, right: 10, left: -10, bottom: 0 }}>
@@ -383,13 +383,13 @@ export default function AdminOverviewPage() {
                       <stop offset="100%" stopColor="#16a34a" stopOpacity={0} />
                     </linearGradient>
                   </defs>
-                  <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" vertical={false} />
+                  <CartesianGrid strokeDasharray="3 3" stroke="currentColor" vertical={false} />
                   <XAxis dataKey="label" tick={{ fontSize: 12, fill: "#94a3b8" }} axisLine={false} tickLine={false} />
                   <YAxis
                     tick={{ fontSize: 12, fill: "#94a3b8" }}
                     axisLine={false}
                     tickLine={false}
-                    tickFormatter={(v) => `$${v >= 1000 ? v / 1000 + "k" : v}`}
+                    tickFormatter={(v) => `৳${v >= 1000 ? v / 1000 + "k" : v}`}
                   />
                   <Tooltip content={<ChartTooltip money />} />
                   <Area
@@ -409,9 +409,9 @@ export default function AdminOverviewPage() {
         </Reveal>
 
         <Reveal delay={600}>
-          <div className="h-full rounded-3xl border border-slate-100 bg-white p-5 shadow-sm sm:p-8">
-            <h2 className="text-lg font-extrabold text-slate-900">Sales by category</h2>
-            <p className="mt-1 text-sm text-slate-500">Share of total book sales</p>
+          <div className="h-full rounded-3xl border border-slate-100 bg-white dark:border-zinc-800 dark:bg-zinc-950 p-5 shadow-sm sm:p-8">
+            <h2 className="text-lg font-extrabold text-slate-900 dark:text-white">Sales by category</h2>
+            <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">Share of total book sales</p>
 
             <div className="relative mx-auto mt-4 h-56 w-56">
               <ResponsiveContainer width="100%" height="100%">
@@ -435,19 +435,19 @@ export default function AdminOverviewPage() {
                 </PieChart>
               </ResponsiveContainer>
               <div className="pointer-events-none absolute inset-0 flex flex-col items-center justify-center">
-                <p className="text-2xl font-extrabold text-slate-900">{categoryTotal}%</p>
-                <p className="text-xs text-slate-500">All categories</p>
+                <p className="text-2xl font-extrabold text-slate-900 dark:text-white">{categoryTotal}%</p>
+                <p className="text-xs text-slate-500 dark:text-slate-400">All categories</p>
               </div>
             </div>
 
             <ul className="mt-4 space-y-2.5">
               {categoryData.map((c) => (
                 <li key={c.name} className="flex items-center justify-between text-sm">
-                  <span className="flex items-center gap-2 text-slate-600">
+                  <span className="flex items-center gap-2 text-slate-600 dark:text-slate-300">
                     <span className="h-3 w-3 rounded-full" style={{ background: c.color }} />
                     {c.name}
                   </span>
-                  <span className="font-bold text-slate-900">{c.value}%</span>
+                  <span className="font-bold text-slate-900 dark:text-white">{c.value}%</span>
                 </li>
               ))}
             </ul>
@@ -458,13 +458,13 @@ export default function AdminOverviewPage() {
       {/* Weekly orders + top books */}
       <section className="grid gap-6 lg:grid-cols-2 sm:gap-8">
         <Reveal delay={700}>
-          <div className="h-full rounded-3xl border border-slate-100 bg-white p-5 shadow-sm sm:p-8">
+          <div className="h-full rounded-3xl border border-slate-100 bg-white dark:border-zinc-800 dark:bg-zinc-950 p-5 shadow-sm sm:p-8">
             <div className="flex items-center justify-between">
               <div>
-                <h2 className="text-lg font-extrabold text-slate-900">Orders this week</h2>
-                <p className="mt-1 text-sm text-slate-500">Placed vs delivered</p>
+                <h2 className="text-lg font-extrabold text-slate-900 dark:text-white">Orders this week</h2>
+                <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">Placed vs delivered</p>
               </div>
-              <div className="flex gap-4 text-xs font-semibold text-slate-500">
+              <div className="flex gap-4 text-xs font-semibold text-slate-500 dark:text-slate-400">
                 <span className="flex items-center gap-1.5">
                   <span className="h-2.5 w-2.5 rounded-full bg-[#e7000b]" /> Placed
                 </span>
@@ -474,13 +474,13 @@ export default function AdminOverviewPage() {
               </div>
             </div>
 
-            <div className="mt-6 h-64 w-full">
+            <div className="mt-6 h-64 w-full text-slate-100 dark:text-zinc-800">
               <ResponsiveContainer width="100%" height="100%">
                 <BarChart data={weeklyOrders} margin={{ top: 10, right: 5, left: -25, bottom: 0 }} barGap={6}>
-                  <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" vertical={false} />
+                  <CartesianGrid strokeDasharray="3 3" stroke="currentColor" vertical={false} />
                   <XAxis dataKey="day" tick={{ fontSize: 12, fill: "#94a3b8" }} axisLine={false} tickLine={false} />
                   <YAxis tick={{ fontSize: 12, fill: "#94a3b8" }} axisLine={false} tickLine={false} />
-                  <Tooltip content={<ChartTooltip />} cursor={{ fill: "#f1f5f9" }} />
+                  <Tooltip content={<ChartTooltip />} cursor={{ fill: "currentColor", fillOpacity: 0.5 }} />
                   <Bar dataKey="placed" name="Placed" fill="#e7000b" radius={[8, 8, 0, 0]} animationDuration={1300} />
                   <Bar dataKey="delivered" name="Delivered" fill="#16a34a" radius={[8, 8, 0, 0]} animationDuration={1500} />
                 </BarChart>
@@ -490,26 +490,26 @@ export default function AdminOverviewPage() {
         </Reveal>
 
         <Reveal delay={800}>
-          <div className="h-full rounded-3xl border border-slate-100 bg-white p-5 shadow-sm sm:p-8">
-            <h2 className="text-lg font-extrabold text-slate-900">Top selling books</h2>
-            <p className="mt-1 text-sm text-slate-500">Copies sold this year</p>
+          <div className="h-full rounded-3xl border border-slate-100 bg-white dark:border-zinc-800 dark:bg-zinc-950 p-5 shadow-sm sm:p-8">
+            <h2 className="text-lg font-extrabold text-slate-900 dark:text-white">Top selling books</h2>
+            <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">Copies sold this year</p>
 
             <ul className="mt-6 space-y-5">
               {topBooks.map((b, i) => (
                 <li key={b.title}>
                   <div className="flex items-center justify-between gap-3">
                     <div className="flex min-w-0 items-center gap-3">
-                      <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-slate-100 text-sm font-extrabold text-slate-600">
+                      <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-slate-100 dark:bg-zinc-800 text-sm font-extrabold text-slate-600 dark:text-slate-300">
                         {i + 1}
                       </span>
                       <div className="min-w-0">
-                        <p className="truncate text-sm font-bold text-slate-900">{b.title}</p>
-                        <p className="truncate text-xs text-slate-500">{b.author}</p>
+                        <p className="truncate text-sm font-bold text-slate-900 dark:text-white">{b.title}</p>
+                        <p className="truncate text-xs text-slate-500 dark:text-slate-400">{b.author}</p>
                       </div>
                     </div>
-                    <span className="shrink-0 text-sm font-extrabold text-slate-900">{b.sold}</span>
+                    <span className="shrink-0 text-sm font-extrabold text-slate-900 dark:text-white">{b.sold}</span>
                   </div>
-                  <div className="mt-2 h-2 overflow-hidden rounded-full bg-slate-100">
+                  <div className="mt-2 h-2 overflow-hidden rounded-full bg-slate-100 dark:bg-zinc-800">
                     <div
                       className="h-full rounded-full bg-gradient-to-r from-green-500 to-[#e7000b] transition-all duration-1000 ease-out"
                       style={{ width: `${(b.sold / maxSold) * 100}%` }}
@@ -525,9 +525,9 @@ export default function AdminOverviewPage() {
       {/* Recent orders + activity */}
       <section className="grid gap-6 lg:grid-cols-[2fr_1fr] sm:gap-8">
         <Reveal delay={900}>
-          <div className="h-full rounded-3xl border border-slate-100 bg-white p-5 shadow-sm sm:p-8">
+          <div className="h-full rounded-3xl border border-slate-100 bg-white dark:border-zinc-800 dark:bg-zinc-950 p-5 shadow-sm sm:p-8 table-wrapper">
             <div className="flex items-center justify-between">
-              <h2 className="text-lg font-extrabold text-slate-900">Recent orders</h2>
+              <h2 className="text-lg font-extrabold text-slate-900 dark:text-white">Recent orders</h2>
               <Link
                 href="/dashboard/admin/orders"
                 className="inline-flex items-center gap-1 text-sm font-semibold text-red-600 hover:underline"
@@ -536,10 +536,10 @@ export default function AdminOverviewPage() {
               </Link>
             </div>
 
-            <div className="mt-5 overflow-x-auto">
+            <div className="mt-5 overflow-x-auto table-wrapper horizonal-scroll">
               <table className="w-full min-w-[520px] text-left text-sm">
                 <thead>
-                  <tr className="border-b border-slate-100 text-xs uppercase tracking-wide text-slate-400">
+                  <tr className="border-b border-slate-100 dark:border-zinc-800 text-xs uppercase tracking-wide text-slate-400">
                     <th className="pb-3 font-semibold">Order</th>
                     <th className="pb-3 font-semibold">Customer</th>
                     <th className="pb-3 font-semibold">Book</th>
@@ -549,11 +549,11 @@ export default function AdminOverviewPage() {
                 </thead>
                 <tbody>
                   {recentOrders.map((o) => (
-                    <tr key={o.id} className="border-b border-slate-50 transition last:border-0 hover:bg-slate-50">
-                      <td className="py-4 font-semibold text-slate-900">{o.id}</td>
-                      <td className="py-4 text-slate-700">{o.customer}</td>
-                      <td className="py-4 text-slate-500">{o.book}</td>
-                      <td className="py-4 font-semibold text-slate-900">${o.total}</td>
+                    <tr key={o.id} className="border-b border-slate-50 dark:border-zinc-800 transition last:border-0 hover:bg-slate-50 dark:hover:bg-zinc-900">
+                      <td className="py-4 font-semibold text-slate-900 dark:text-white">{o.id}</td>
+                      <td className="py-4 text-slate-700 dark:text-slate-200">{o.customer}</td>
+                      <td className="py-4 text-slate-500 dark:text-slate-400">{o.book}</td>
+                      <td className="py-4 font-semibold text-slate-900 dark:text-white">৳{o.total}</td>
                       <td className="py-4">
                         <span className={`rounded-full px-3 py-1 text-xs font-bold ${statusStyle[o.status]}`}>
                           {o.status}
@@ -568,19 +568,19 @@ export default function AdminOverviewPage() {
         </Reveal>
 
         <Reveal delay={1000}>
-          <div className="h-full rounded-3xl border border-slate-100 bg-white p-5 shadow-sm sm:p-8">
-            <h2 className="text-lg font-extrabold text-slate-900">Recent activity</h2>
+          <div className="h-full rounded-3xl border border-slate-100 bg-white dark:border-zinc-800 dark:bg-zinc-950 p-5 shadow-sm sm:p-8">
+            <h2 className="text-lg font-extrabold text-slate-900 dark:text-white">Recent activity</h2>
             <ul className="relative mt-6 space-y-5">
-              <span className="absolute bottom-2 left-5 top-2 w-px bg-slate-100" />
+              <span className="absolute bottom-2 left-5 top-2 w-px bg-slate-100 dark:bg-zinc-800" />
               {activity.map((a) => {
                 const Icon = a.icon;
                 return (
                   <li key={a.text} className="relative flex items-start gap-4">
-                    <span className={`relative z-10 flex h-10 w-10 shrink-0 items-center justify-center rounded-full text-lg ring-4 ring-white ${a.color}`}>
+                    <span className={`relative z-10 flex h-10 w-10 shrink-0 items-center justify-center rounded-full text-lg ring-4 ring-white dark:ring-zinc-950 ${a.color}`}>
                       <Icon />
                     </span>
                     <div className="min-w-0 pt-0.5">
-                      <p className="text-sm font-semibold text-slate-900">{a.text}</p>
+                      <p className="text-sm font-semibold text-slate-900 dark:text-white">{a.text}</p>
                       <p className="text-xs text-slate-400">{a.time}</p>
                     </div>
                   </li>

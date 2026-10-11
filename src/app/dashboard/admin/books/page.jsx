@@ -17,9 +17,11 @@ import {
 import { TbCurrencyTaka } from "react-icons/tb";
 
 const stockBadge = (qty) => {
-  if (qty === 0) return { text: "Out of stock", style: "bg-red-100 text-red-700" };
-  if (qty <= 5) return { text: `Only ${qty} left`, style: "bg-amber-100 text-amber-700" };
-  return { text: `${qty} in stock`, style: "bg-green-100 text-green-700" };
+  if (qty === 0)
+    return { text: "Out of stock", style: "bg-red-100 text-red-700 dark:bg-red-500/20 dark:text-red-300" };
+  if (qty <= 5)
+    return { text: `Only ${qty} left`, style: "bg-amber-100 text-amber-700 dark:bg-amber-500/20 dark:text-amber-300" };
+  return { text: `${qty} in stock`, style: "bg-green-100 text-green-700 dark:bg-green-500/20 dark:text-green-300" };
 };
 
 const page = async ({ searchParams }) => {
@@ -49,10 +51,10 @@ const page = async ({ searchParams }) => {
   });
 
   const stats = [
-    { label: "Total books", value: allBooks.length, icon: FiBook, color: "bg-blue-100 text-blue-600" },
-    { label: "In stock", value: inStock, icon: FiCheckCircle, color: "bg-green-100 text-green-600" },
-    { label: "Low stock", value: lowStock, icon: FiAlertTriangle, color: "bg-amber-100 text-amber-600" },
-    { label: "Out of stock", value: outOfStock, icon: FiXCircle, color: "bg-red-100 text-red-600" },
+    { label: "Total books", value: allBooks.length, icon: FiBook, color: "bg-blue-100 text-blue-600 dark:bg-blue-500/20 dark:text-blue-400" },
+    { label: "In stock", value: inStock, icon: FiCheckCircle, color: "bg-green-100 text-green-600 dark:bg-green-500/20 dark:text-green-400" },
+    { label: "Low stock", value: lowStock, icon: FiAlertTriangle, color: "bg-amber-100 text-amber-600 dark:bg-amber-500/20 dark:text-amber-400" },
+    { label: "Out of stock", value: outOfStock, icon: FiXCircle, color: "bg-red-100 text-red-600 dark:bg-red-500/20 dark:text-red-400" },
   ];
 
   const filterHref = (value) => {
@@ -68,16 +70,16 @@ const page = async ({ searchParams }) => {
       {/* Header */}
       <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <div>
-          <h1 className="text-2xl font-extrabold tracking-tight text-slate-900 sm:text-3xl">
+          <h1 className="text-2xl font-extrabold tracking-tight text-slate-900 dark:text-white sm:text-3xl">
             Manage books
           </h1>
-          <p className="mt-1 text-sm text-slate-500">
+          <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">
             View, edit and remove the books in your store.
           </p>
         </div>
         <Link
           href="/dashboard/admin/add-book"
-          className="inline-flex items-center justify-center gap-2 rounded-xl bg-[#e7000b] px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-red-200 transition hover:bg-red-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-red-500 focus-visible:ring-offset-2"
+          className="inline-flex items-center justify-center gap-2 rounded-xl bg-[#e7000b] px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-red-200 transition hover:bg-red-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-red-500 focus-visible:ring-offset-2 dark:shadow-red-900/40 dark:focus-visible:ring-offset-zinc-900"
         >
           <FiPlusCircle />
           Add new book
@@ -89,13 +91,13 @@ const page = async ({ searchParams }) => {
         {stats.map(({ label, value, icon: Icon, color }) => (
           <div
             key={label}
-            className="rounded-3xl border border-slate-100 bg-white p-5 shadow-sm"
+            className="rounded-3xl border border-slate-100 bg-white p-5 shadow-sm dark:border-zinc-800 dark:bg-zinc-950"
           >
             <span className={`flex h-11 w-11 items-center justify-center rounded-2xl text-xl ${color}`}>
               <Icon />
             </span>
-            <p className="mt-4 text-2xl font-extrabold text-slate-900 sm:text-3xl">{value}</p>
-            <p className="text-xs text-slate-500 sm:text-sm">{label}</p>
+            <p className="mt-4 text-2xl font-extrabold text-slate-900 dark:text-white sm:text-3xl">{value}</p>
+            <p className="text-xs text-slate-500 dark:text-slate-400 sm:text-sm">{label}</p>
           </div>
         ))}
       </section>
@@ -109,8 +111,8 @@ const page = async ({ searchParams }) => {
               href={filterHref(c)}
               className={`shrink-0 rounded-full px-5 py-2 text-sm font-semibold transition ${
                 category.toLowerCase() === c.toLowerCase()
-                  ? "bg-green-600 text-white shadow-md shadow-green-200"
-                  : "border border-slate-200 bg-white text-slate-600 hover:border-green-300 hover:text-green-700"
+                  ? "bg-green-600 text-white shadow-md shadow-green-200 dark:shadow-green-900/40"
+                  : "border border-slate-200 bg-white text-slate-600 hover:border-green-300 hover:text-green-700 dark:border-zinc-700 dark:bg-zinc-950 dark:text-slate-300 dark:hover:border-green-500 dark:hover:text-green-400"
               }`}
             >
               {c || "All"}
@@ -120,7 +122,7 @@ const page = async ({ searchParams }) => {
 
         <form
           method="get"
-          className="flex w-full items-center gap-2 rounded-2xl border border-slate-200 bg-white p-1.5 shadow-sm lg:max-w-sm"
+          className="flex w-full items-center gap-2 rounded-2xl border border-slate-200 bg-white p-1.5 shadow-sm dark:border-zinc-700 dark:bg-zinc-950 lg:max-w-sm"
         >
           {category && <input type="hidden" name="category" value={category} />}
           <FiSearch className="ml-3 shrink-0 text-lg text-slate-400" />
@@ -129,11 +131,11 @@ const page = async ({ searchParams }) => {
             type="text"
             defaultValue={query}
             placeholder="Search by title or author..."
-            className="min-w-0 flex-1 bg-transparent px-1 py-2 text-sm placeholder:text-slate-400 focus:outline-none"
+            className="min-w-0 flex-1 bg-transparent px-1 py-2 text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none dark:text-white"
           />
           <button
             type="submit"
-            className="rounded-xl bg-slate-900 px-4 py-2 text-sm font-semibold text-white transition hover:bg-slate-800"
+            className="rounded-xl bg-slate-900 px-4 py-2 text-sm font-semibold text-white transition hover:bg-slate-800 dark:bg-green-600 dark:hover:bg-green-700"
           >
             Search
           </button>
@@ -142,7 +144,7 @@ const page = async ({ searchParams }) => {
 
       {/* Table */}
       {books.length > 0 ? (
-        <section className="overflow-hidden rounded-3xl border border-slate-100 bg-white shadow-sm">
+        <section className="overflow-hidden rounded-3xl border border-slate-100 bg-white shadow-sm dark:border-zinc-800 dark:bg-zinc-950">
           <Table>
             <Table.ScrollContainer>
               <Table.Content aria-label="Manage books table" className="min-w-[820px]">
@@ -150,15 +152,17 @@ const page = async ({ searchParams }) => {
                   <Table.Column isRowHeader>Book</Table.Column>
                   <Table.Column>Category</Table.Column>
                   <Table.Column>Stock</Table.Column>
-                  <Table.Column>TK</Table.Column>
+                  <Table.Column>Price</Table.Column>
                   <Table.Column>Actions</Table.Column>
                 </Table.Header>
 
                 <Table.Body>
                   {books.map((book) => {
                     const badge = stockBadge(qtyOf(book));
+                    const hasPrice =
+                      book.price != null && book.price !== "" && Number(book.price) > 0;
                     return (
-                      <Table.Row key={book._id} id={String(book._id)}>
+                      <Table.Row key={String(book._id)} id={String(book._id)}>
                         {/* Book: cover, title, author */}
                         <Table.Cell>
                           <div className="flex items-center gap-4 py-1">
@@ -166,18 +170,18 @@ const page = async ({ searchParams }) => {
                             <img
                               src={book.image_url}
                               alt={book.title}
-                              className="h-16 w-12 shrink-0 rounded-md bg-slate-100 object-cover shadow"
+                              className="h-16 w-12 shrink-0 rounded-md bg-slate-100 object-cover shadow dark:bg-zinc-800"
                             />
                             <div className="min-w-0 max-w-[260px]">
-                              <p className="truncate font-semibold text-slate-900">{book.title}</p>
-                              <p className="truncate text-xs text-slate-500">by {book.author}</p>
+                              <p className="truncate font-semibold text-slate-900 dark:text-white">{book.title}</p>
+                              <p className="truncate text-xs text-slate-500 dark:text-slate-400">by {book.author}</p>
                             </div>
                           </div>
                         </Table.Cell>
 
                         {/* Category */}
                         <Table.Cell>
-                          <span className="inline-flex rounded-full bg-blue-50 px-3 py-1 text-xs font-bold text-blue-700">
+                          <span className="inline-flex rounded-full bg-blue-50 px-3 py-1 text-xs font-bold text-blue-700 dark:bg-blue-500/20 dark:text-blue-300">
                             {book.category}
                           </span>
                         </Table.Cell>
@@ -189,9 +193,18 @@ const page = async ({ searchParams }) => {
                           </span>
                         </Table.Cell>
 
-                        {/* ID */}
+                        {/* Price (taka) */}
                         <Table.Cell>
-                          <span className="text-sm font-medium text-slate-500 flex items-center gap-2"><TbCurrencyTaka/>{book.price ||"000"}</span>
+                          {hasPrice ? (
+                            <span className="inline-flex items-center text-sm font-bold text-slate-900 dark:text-white">
+                              <TbCurrencyTaka className="text-lg" />
+                              {Number(book.price).toLocaleString("en-US")}
+                            </span>
+                          ) : (
+                            <span className="inline-flex rounded-full bg-amber-100 px-3 py-1 text-xs font-bold text-amber-700 dark:bg-amber-500/20 dark:text-amber-300">
+                              No price
+                            </span>
+                          )}
                         </Table.Cell>
 
                         {/* Actions */}
@@ -200,18 +213,19 @@ const page = async ({ searchParams }) => {
                             <Link
                               href={`/book/${book._id}`}
                               aria-label={`View ${book.title}`}
-                              className="flex h-9 w-9 items-center justify-center rounded-lg bg-slate-100 text-slate-600 transition hover:bg-slate-800 hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-slate-500"
+                              className="flex h-9 w-9 items-center justify-center rounded-lg bg-slate-100 text-slate-600 transition hover:bg-slate-800 hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-slate-500 dark:bg-zinc-800 dark:text-slate-300 dark:hover:bg-white dark:hover:text-slate-900"
                             >
                               <FiEye />
                             </Link>
                             <Link
                               href={`/dashboard/admin/books/${book._id}`}
                               aria-label={`Edit ${book.title}`}
-                              className="flex h-9 w-9 items-center justify-center rounded-lg bg-green-50 text-green-600 transition hover:bg-green-600 hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-green-500"
+                              className="flex h-9 w-9 items-center justify-center rounded-lg bg-green-50 text-green-600 transition hover:bg-green-600 hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-green-500 dark:bg-green-500/20 dark:text-green-400 dark:hover:bg-green-600 dark:hover:text-white"
                             >
                               <FiEdit2 />
                             </Link>
-                            <DeleteBookButton id={book._id} title={book.title} />
+                            {/* String() because a Mongo ObjectId cannot be passed to a client component */}
+                            <DeleteBookButton id={String(book._id)} title={book.title} />
                           </div>
                         </Table.Cell>
                       </Table.Row>
@@ -222,25 +236,25 @@ const page = async ({ searchParams }) => {
             </Table.ScrollContainer>
 
             <Table.Footer>
-              <p className="px-5 py-4 text-sm text-slate-500">
-                Showing <span className="font-bold text-slate-900">{books.length}</span> of{" "}
+              <p className="px-5 py-4 text-sm text-slate-500 dark:text-slate-400">
+                Showing <span className="font-bold text-slate-900 dark:text-white">{books.length}</span> of{" "}
                 {allBooks.length} books
               </p>
             </Table.Footer>
           </Table>
         </section>
       ) : (
-        <div className="mx-auto max-w-md rounded-3xl border border-dashed border-slate-300 bg-white px-6 py-14 text-center">
-          <span className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-slate-100 text-2xl text-slate-400">
+        <div className="mx-auto max-w-md rounded-3xl border border-dashed border-slate-300 bg-white px-6 py-14 text-center dark:border-zinc-700 dark:bg-zinc-950">
+          <span className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-slate-100 text-2xl text-slate-400 dark:bg-zinc-800">
             <FiSearch />
           </span>
-          <h2 className="mt-5 text-lg font-bold text-slate-900">No books found</h2>
-          <p className="mt-2 text-sm text-slate-500">
+          <h2 className="mt-5 text-lg font-bold text-slate-900 dark:text-white">No books found</h2>
+          <p className="mt-2 text-sm text-slate-500 dark:text-slate-400">
             Try a different title or author, or clear the filters.
           </p>
           <Link
             href="/dashboard/admin/books"
-            className="mt-6 inline-flex items-center gap-2 rounded-xl bg-slate-900 px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-slate-800"
+            className="mt-6 inline-flex items-center gap-2 rounded-xl bg-slate-900 px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-slate-800 dark:bg-green-600 dark:hover:bg-green-700"
           >
             <FiX />
             Clear filters
