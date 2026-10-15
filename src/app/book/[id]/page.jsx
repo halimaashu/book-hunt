@@ -127,7 +127,12 @@ export default async function ViewDetailPage({ params }) {
 
             {/* Actions: pass plain strings/numbers only (ObjectId cannot go to client components) */}
             <div className="rounded-3xl border border-slate-100 bg-white p-5 shadow-sm sm:p-6">
-              <BookActions bookId={String(book._id ?? book.id)} stock={qty} />
+              <BookActions
+                bookId={String(book._id ?? book.id)}
+                stock={qty}
+                title={book.title}
+                price={Number(book.price) || 0}
+              />
             </div>
 
             {/* Trust row */}
