@@ -12,7 +12,8 @@ import { ModeToggle } from "../ui/ModeToggle";
 const baseLinks = [
   { label: "Home", href: "/" },
   { label: "Books", href: "/allBooks" },
-  { label: "Profile", href: "/profile" },
+  
+  { label: "Polytechnic", href: "/polytechnic" },
   { label: "Contact", href: "/contact" },
 ];
 

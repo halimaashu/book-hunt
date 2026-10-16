@@ -23,7 +23,7 @@ import { ModeToggle } from "@/components/ui/ModeToggle";
 const userNav = [
   { label: "Overview", href: "/dashboard", icon: FiGrid, exact: true },
   { label: "My orders", href: "/dashboard/orders", icon: FiShoppingBag },
-  { label: "My profile", href: "/profile", icon: FiUser },
+  { label: "My profile", href: "/dashboard/profile", icon: FiUser },
   { label: "Browse books", href: "/allBooks", icon: FiBookOpen },
 ];
 
@@ -33,7 +33,7 @@ const adminNav = [
   { label: "Add book", href: "/dashboard/admin/add-book", icon: FiPlusCircle },
   { label: "Orders", href: "/dashboard/admin/orders", icon: FiShoppingBag },
   { label: "Users", href: "/dashboard/admin/users", icon: FiUsers },
-  { label: "My profile", href: "/profile", icon: FiUser },
+  { label: "My profile", href: "/dashboard/admin/profile", icon: FiUser },
 ];
 
 function Avatar({ user, size = "h-10 w-10" }) {
