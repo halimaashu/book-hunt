@@ -4,7 +4,7 @@ import { betterAuth } from "better-auth";
 import { twoFactor } from "better-auth/plugins";
 import { MongoClient } from "mongodb";
 import { mongodbAdapter } from "better-auth/adapters/mongodb";
-
+import { jwt } from "better-auth/plugins";
 const client = new MongoClient(process.env.BETTER_AUTH_LINKED);
 const db = client.db("book-hunt");
 
@@ -56,4 +56,15 @@ export const auth = betterAuth({
       },
     },
   },
+
+session:{
+  cookieCache:{
+    enabled:true,
+    strategy:'jwt',
+    maxAge:60*24*30
+  }
+},
+  plugins:[
+    jwt()
+  ],
 });

@@ -90,7 +90,8 @@ export default function BookActions({ bookId, stock = 0, title = "", price = 0 }
   const handleSubmit =async (e) => {
     e.preventDefault();
     const formData = Object.fromEntries(new FormData(e.currentTarget).entries());
-
+     const { data:token } = await authClient.token();
+     
     const order = {
       // product details
       bookId: String(bookId),
@@ -107,12 +108,15 @@ export default function BookActions({ bookId, stock = 0, title = "", price = 0 }
     setSubmitted(order);
     const res= await fetch(`${process.env.NEXT_PUBLIC_API_URL}order`,{
       method:"POST",
-      headers:{"content-type":"application/json"},
+      headers:{
+        "content-type":"application/json",
+        Authorization: `Bearer ${token.token}`,
+      },
       body:JSON.stringify(order)
     })
-    const data=await res.json()
-    console.log(data,"from my server response")
-    window.location.replace(data.url)
+    const finalData=await res.json()
+    console.log(finalData,"from my server response")
+    window.location.replace(finalData.url)
 
 
     // TODO: send `order` to your API here, then go to payment
