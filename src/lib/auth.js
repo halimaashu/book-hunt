@@ -16,7 +16,7 @@ export const auth = betterAuth({
 
    trustedOrigins: [
     "http://localhost:3000",
-    "https://book-hunt-omega.vercel.app",
+    "https://book-hunt-lj33bc06y-halimaashus-projects.vercel.app/",
   ],
    plugins: [
     twoFactor({
