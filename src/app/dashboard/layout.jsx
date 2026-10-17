@@ -32,6 +32,7 @@ const adminNav = [
   { label: "Manage books", href: "/dashboard/admin/books", icon: FiBookOpen },
   { label: "Add book", href: "/dashboard/admin/add-book", icon: FiPlusCircle },
   { label: "Orders", href: "/dashboard/admin/orders", icon: FiShoppingBag },
+  { label: "Polytechnic Orders", href: "/dashboard/admin/polytechnic", icon: FiShoppingBag },
   { label: "Users", href: "/dashboard/admin/users", icon: FiUsers },
   { label: "My profile", href: "/dashboard/admin/profile", icon: FiUser },
 ];

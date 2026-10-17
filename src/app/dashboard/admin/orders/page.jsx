@@ -45,7 +45,10 @@ const formatDate = (date) =>
 
 const formatTime = (date) =>
   date
-    ? new Date(date).toLocaleTimeString("en-US", { hour: "numeric", minute: "2-digit" })
+    ? new Date(date).toLocaleTimeString("en-US", {
+        hour: "numeric",
+        minute: "2-digit",
+      })
     : "";
 
 const num = (n) => Number(n || 0).toLocaleString("en-US");
@@ -64,10 +67,23 @@ const page = async ({ searchParams }) => {
   let allOrders = [];
   let loadError = false;
   try {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}orders`, { cache: "no-store" });
+    const { token } = await auth.api.getToken({
+      headers: await headers(),
+    });
+    
+
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}orders`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
     if (!res.ok) throw new Error("Request failed");
     const json = await res.json();
-    allOrders = Array.isArray(json) ? json : Array.isArray(json?.data) ? json.data : [];
+    allOrders = Array.isArray(json)
+      ? json
+      : Array.isArray(json?.data)
+        ? json.data
+        : [];
   } catch {
     loadError = true;
   }
@@ -78,7 +94,9 @@ const page = async ({ searchParams }) => {
   const totalOf = (o) => Number(o.price || 0) * Number(o.quantity || 1);
   const paidCount = allOrders.filter((o) => o.isPaid).length;
   const pendingCount = allOrders.length - paidCount;
-  const revenue = allOrders.filter((o) => o.isPaid).reduce((sum, o) => sum + totalOf(o), 0);
+  const revenue = allOrders
+    .filter((o) => o.isPaid)
+    .reduce((sum, o) => sum + totalOf(o), 0);
 
   const orders = allOrders.filter((o) => {
     const matchesStatus =
@@ -93,10 +111,32 @@ const page = async ({ searchParams }) => {
   });
 
   const stats = [
-    { label: "Total orders", value: allOrders.length, icon: FiShoppingBag, color: "bg-blue-100 text-blue-600 dark:bg-blue-500/20 dark:text-blue-400" },
-    { label: "Paid", value: paidCount, icon: FiCheckCircle, color: "bg-green-100 text-green-600 dark:bg-green-500/20 dark:text-green-400" },
-    { label: "Pending", value: pendingCount, icon: FiClock, color: "bg-amber-100 text-amber-600 dark:bg-amber-500/20 dark:text-amber-400" },
-    { label: "Revenue (paid)", value: `৳${num(revenue)}`, icon: FiCheckCircle, color: "bg-red-100 text-red-600 dark:bg-red-500/20 dark:text-red-400" },
+    {
+      label: "Total orders",
+      value: allOrders.length,
+      icon: FiShoppingBag,
+      color: "bg-blue-100 text-blue-600 dark:bg-blue-500/20 dark:text-blue-400",
+    },
+    {
+      label: "Paid",
+      value: paidCount,
+      icon: FiCheckCircle,
+      color:
+        "bg-green-100 text-green-600 dark:bg-green-500/20 dark:text-green-400",
+    },
+    {
+      label: "Pending",
+      value: pendingCount,
+      icon: FiClock,
+      color:
+        "bg-amber-100 text-amber-600 dark:bg-amber-500/20 dark:text-amber-400",
+    },
+    {
+      label: "Revenue (paid)",
+      value: `৳${num(revenue)}`,
+      icon: FiCheckCircle,
+      color: "bg-red-100 text-red-600 dark:bg-red-500/20 dark:text-red-400",
+    },
   ];
 
   const filterHref = (value) => {
@@ -125,7 +165,8 @@ const page = async ({ searchParams }) => {
           className="flex items-start gap-3 rounded-2xl border border-red-200 bg-red-50 px-5 py-4 text-sm text-red-700 dark:border-red-500/30 dark:bg-red-500/10 dark:text-red-300"
         >
           <FiAlertCircle className="mt-0.5 shrink-0 text-xl" />
-          Could not load the orders. Check that your API is running and try again.
+          Could not load the orders. Check that your API is running and try
+          again.
         </div>
       )}
 
@@ -136,11 +177,17 @@ const page = async ({ searchParams }) => {
             key={label}
             className="rounded-3xl border border-slate-100 bg-white p-5 shadow-sm dark:border-zinc-800 dark:bg-zinc-950"
           >
-            <span className={`flex h-11 w-11 items-center justify-center rounded-2xl text-xl ${color}`}>
+            <span
+              className={`flex h-11 w-11 items-center justify-center rounded-2xl text-xl ${color}`}
+            >
               <Icon />
             </span>
-            <p className="mt-4 text-2xl font-extrabold text-slate-900 dark:text-white sm:text-3xl">{value}</p>
-            <p className="text-xs text-slate-500 dark:text-slate-400 sm:text-sm">{label}</p>
+            <p className="mt-4 text-2xl font-extrabold text-slate-900 dark:text-white sm:text-3xl">
+              {value}
+            </p>
+            <p className="text-xs text-slate-500 dark:text-slate-400 sm:text-sm">
+              {label}
+            </p>
           </div>
         ))}
       </section>
@@ -190,7 +237,10 @@ const page = async ({ searchParams }) => {
         <section className="overflow-hidden rounded-3xl border border-slate-100 bg-white shadow-sm dark:border-zinc-800 dark:bg-zinc-950">
           <Table>
             <Table.ScrollContainer>
-              <Table.Content aria-label="All orders table" className="min-w-[1040px]">
+              <Table.Content
+                aria-label="All orders table"
+                className="min-w-[1040px]"
+              >
                 <Table.Header>
                   <Table.Column isRowHeader>Order</Table.Column>
                   <Table.Column>Customer</Table.Column>
@@ -227,8 +277,12 @@ const page = async ({ searchParams }) => {
                         {/* Customer */}
                         <Table.Cell>
                           <div className="min-w-0 max-w-[220px] py-1">
-                            <p className="truncate font-semibold text-slate-900 dark:text-white">{o.name}</p>
-                            <p className="truncate text-xs text-slate-500 dark:text-slate-400">{o.email}</p>
+                            <p className="truncate font-semibold text-slate-900 dark:text-white">
+                              {o.name}
+                            </p>
+                            <p className="truncate text-xs text-slate-500 dark:text-slate-400">
+                              {o.email}
+                            </p>
                             <p className="mt-0.5 flex items-center gap-1 text-xs text-slate-500 dark:text-slate-400">
                               <FiPhone className="shrink-0" />
                               {o.phone}
@@ -239,7 +293,9 @@ const page = async ({ searchParams }) => {
                         {/* Book */}
                         <Table.Cell>
                           <div className="min-w-0 max-w-[200px]">
-                            <p className="truncate font-semibold text-slate-900 dark:text-white">{o.bookTitle}</p>
+                            <p className="truncate font-semibold text-slate-900 dark:text-white">
+                              {o.bookTitle}
+                            </p>
                             <p className="text-xs text-slate-500 dark:text-slate-400">
                               {o.quantity} × ৳{num(o.price)}
                             </p>
@@ -270,7 +326,10 @@ const page = async ({ searchParams }) => {
 
                         {/* Address */}
                         <Table.Cell>
-                          <p className="max-w-[240px] truncate text-sm text-slate-600 dark:text-slate-300" title={parseAddress(o.properAddress)}>
+                          <p
+                            className="max-w-[240px] truncate text-sm text-slate-600 dark:text-slate-300"
+                            title={parseAddress(o.properAddress)}
+                          >
                             {parseAddress(o.properAddress)}
                           </p>
                         </Table.Cell>
@@ -294,8 +353,11 @@ const page = async ({ searchParams }) => {
 
             <Table.Footer>
               <p className="px-5 py-4 text-sm text-slate-500 dark:text-slate-400">
-                Showing <span className="font-bold text-slate-900 dark:text-white">{orders.length}</span> of{" "}
-                {allOrders.length} orders
+                Showing{" "}
+                <span className="font-bold text-slate-900 dark:text-white">
+                  {orders.length}
+                </span>{" "}
+                of {allOrders.length} orders
               </p>
             </Table.Footer>
           </Table>
