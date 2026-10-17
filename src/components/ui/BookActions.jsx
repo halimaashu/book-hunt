@@ -104,7 +104,7 @@ export default function BookActions({ bookId, stock = 0, title = "", price = 0 }
       
     };
 
-    console.log("Buy form data:", order);
+    // console.log("Buy form data:", order);
     setSubmitted(order);
     const res= await fetch(`${process.env.NEXT_PUBLIC_API_URL}order`,{
       method:"POST",

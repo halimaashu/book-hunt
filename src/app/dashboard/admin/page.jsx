@@ -193,7 +193,7 @@ function Reveal({ delay = 0, className = "", children }) {
   }, []);
   return (
     <div
-      className={`transition-all duration-700 ease-out ${
+      className={`min-w-0 transition-all duration-700 ease-out ${
         show ? "translate-y-0 opacity-100" : "translate-y-6 opacity-0"
       } ${className}`}
       style={{ transitionDelay: `${delay}ms` }}
@@ -206,7 +206,7 @@ function Reveal({ delay = 0, className = "", children }) {
 function ChartTooltip({ active, payload, label, money }) {
   if (!active || !payload?.length) return null;
   return (
-    <div className="rounded-xl border border-slate-100 dark:border-zinc-800 bg-white px-4 py-3 shadow-xl dark:border-zinc-700 dark:bg-zinc-900">
+    <div className="rounded-xl border border-slate-100 bg-white px-4 py-3 shadow-xl dark:border-zinc-700 dark:bg-zinc-900">
       <p className="text-xs font-semibold text-slate-400">{label}</p>
       {payload.map((p) => (
         <p key={p.dataKey} className="mt-1 flex items-center gap-2 text-sm font-bold text-slate-900 dark:text-white">
@@ -333,14 +333,14 @@ export default function AdminOverviewPage() {
       </Reveal>
 
       {/* Stat cards */}
-      <section className="grid grid-cols-2 gap-4 lg:grid-cols-4 sm:gap-6">
+      <section className="grid grid-cols-1 gap-4 min-[480px]:grid-cols-2 lg:grid-cols-4 sm:gap-6">
         {stats.map((s, i) => (
           <StatCard key={s.label} stat={s} delay={100 + i * 100} />
         ))}
       </section>
 
       {/* Revenue chart + category donut */}
-      <section className="grid gap-6 lg:grid-cols-[2fr_1fr] sm:gap-8">
+      <section className="grid grid-cols-1 gap-6 lg:grid-cols-[minmax(0,2fr)_minmax(0,1fr)] sm:gap-8">
         <Reveal delay={500}>
           <div className="h-full rounded-3xl border border-slate-100 bg-white dark:border-zinc-800 dark:bg-zinc-950 p-5 shadow-sm sm:p-8">
             <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
@@ -456,10 +456,10 @@ export default function AdminOverviewPage() {
       </section>
 
       {/* Weekly orders + top books */}
-      <section className="grid gap-6 lg:grid-cols-2 sm:gap-8">
+      <section className="grid grid-cols-1 gap-6 lg:grid-cols-2 sm:gap-8">
         <Reveal delay={700}>
           <div className="h-full rounded-3xl border border-slate-100 bg-white dark:border-zinc-800 dark:bg-zinc-950 p-5 shadow-sm sm:p-8">
-            <div className="flex items-center justify-between">
+            <div className="flex flex-wrap items-center justify-between gap-3">
               <div>
                 <h2 className="text-lg font-extrabold text-slate-900 dark:text-white">Orders this week</h2>
                 <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">Placed vs delivered</p>
@@ -523,9 +523,9 @@ export default function AdminOverviewPage() {
       </section>
 
       {/* Recent orders + activity */}
-      <section className="grid gap-6 lg:grid-cols-[2fr_1fr] sm:gap-8">
+      <section className="grid grid-cols-1 gap-6 lg:grid-cols-[minmax(0,2fr)_minmax(0,1fr)] sm:gap-8">
         <Reveal delay={900}>
-          <div className="h-full rounded-3xl border border-slate-100 bg-white dark:border-zinc-800 dark:bg-zinc-950 p-5 shadow-sm sm:p-8 table-wrapper">
+          <div className="h-full rounded-3xl border border-slate-100 bg-white dark:border-zinc-800 dark:bg-zinc-950 p-5 shadow-sm sm:p-8">
             <div className="flex items-center justify-between">
               <h2 className="text-lg font-extrabold text-slate-900 dark:text-white">Recent orders</h2>
               <Link
@@ -536,7 +536,27 @@ export default function AdminOverviewPage() {
               </Link>
             </div>
 
-            <div className="mt-5 overflow-x-auto table-wrapper horizonal-scroll">
+            {/* Phones: one card per order */}
+            <ul className="mt-5 space-y-3 sm:hidden">
+              {recentOrders.map((o) => (
+                <li key={o.id} className="rounded-2xl border border-slate-100 p-4 dark:border-zinc-800">
+                  <div className="flex items-center justify-between gap-3">
+                    <p className="font-bold text-slate-900 dark:text-white">{o.id}</p>
+                    <span className={`rounded-full px-3 py-1 text-xs font-bold ${statusStyle[o.status]}`}>
+                      {o.status}
+                    </span>
+                  </div>
+                  <p className="mt-2 text-sm font-semibold text-slate-700 dark:text-slate-200">{o.customer}</p>
+                  <div className="mt-1 flex items-center justify-between gap-3 text-sm">
+                    <span className="min-w-0 truncate text-slate-500 dark:text-slate-400">{o.book}</span>
+                    <span className="shrink-0 font-bold text-slate-900 dark:text-white">৳{o.total}</span>
+                  </div>
+                </li>
+              ))}
+            </ul>
+
+            {/* Tablet and up: the table */}
+            <div className="mt-5 hidden overflow-x-auto sm:block">
               <table className="w-full min-w-[520px] text-left text-sm">
                 <thead>
                   <tr className="border-b border-slate-100 dark:border-zinc-800 text-xs uppercase tracking-wide text-slate-400">

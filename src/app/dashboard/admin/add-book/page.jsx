@@ -1,5 +1,6 @@
 "use client";
 
+import { authClient } from "@/lib/auth-client";
 import {
   Button,
   FieldError,
@@ -100,6 +101,10 @@ export default function AddBookPage() {
 
   const onSubmit = async (e) => {
     e.preventDefault();
+    const { data, error } = await authClient.token()
+    const token=data?.token
+    console.log(token,"fro varify the token from the add bookd pages")
+    
     setError("");
     setSuccess(false);
 
@@ -120,7 +125,10 @@ export default function AddBookPage() {
       setStep("saving");
       const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}book`, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: { "Content-Type": 
+          "application/json",
+          Authorization: `Bearer ${token}`,
+         },
         body: JSON.stringify({
           title: title.trim(),
           author: author.trim(),
