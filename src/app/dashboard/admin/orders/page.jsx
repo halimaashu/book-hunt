@@ -70,7 +70,7 @@ const page = async ({ searchParams }) => {
     const { token } = await auth.api.getToken({
       headers: await headers(),
     });
-    
+    console.log(token,"from ADDDDDDDDDDDDDDDDDDDDDDDDDDDDDD")
 
     const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}orders`, {
       headers: {

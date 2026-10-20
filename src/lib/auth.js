@@ -13,10 +13,10 @@ export const auth = betterAuth({
     // Optional: if you don't provide a client, database transactions won't be enabled.
     client
   }),
-
+// https://book-hunt-omega.vercel.app/
    trustedOrigins: [
     "http://localhost:3000",
-    "https://book-hunt-omega.vercel.app/",
+    "https://book-hunt-omega.vercel.app",
   ],
    plugins: [
     twoFactor({
@@ -29,6 +29,7 @@ export const auth = betterAuth({
         },
       },
     }),
+    jwt(),
   ],
   emailAndPassword: { 
     enabled: true, 
@@ -64,7 +65,5 @@ session:{
     maxAge:60*24*30
   }
 },
-  plugins:[
-    jwt()
-  ],
+
 });
